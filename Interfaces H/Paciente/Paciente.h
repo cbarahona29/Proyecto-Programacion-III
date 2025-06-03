@@ -43,4 +43,10 @@ class Paciente {
         void setFechaNacimiento(string fecha) { fechaNacimiento = fecha; }
         void setDireccion(string direccion) { this->direccion = direccion; }
 
+        // Sobre carga de Operadores
+        bool operator== (const Paciente& otro) const {
+            return ID == otro.ID;
+        }
+
+
 };
