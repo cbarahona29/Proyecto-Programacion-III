@@ -1,0 +1,15 @@
+# ninja log v6
+25	173	7706050607628268	ProyectoProgramacion3v2_autogen/timestamp	3f34d1ad03b5d882
+174	2000	7706050609214954	CMakeFiles/ProyectoProgramacion3v2.dir/mainmenu.cpp.obj	74c802283ce9cb3c
+194	1847	7706042196959394	CMakeFiles/ProyectoProgramacion3v2.dir/menurecepcionista.cpp.obj	9858d22095420566
+25	173	7706050607628268	ProyectoProgramacion3v2_autogen/mocs_compilation.cpp	3f34d1ad03b5d882
+2000	2188	7706018546714393	ProyectoProgramacion3v2.exe	d05c6118a6fe9928
+25	173	7706050607628268	C:/Users/danilos/Documents/ProyectoProgramacion3v2/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/ProyectoProgramacion3v2_autogen/timestamp	3f34d1ad03b5d882
+25	173	7706050607628268	C:/Users/danilos/Documents/ProyectoProgramacion3v2/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/ProyectoProgramacion3v2_autogen/mocs_compilation.cpp	3f34d1ad03b5d882
+921	3635	7706041025002409	CMakeFiles/ProyectoProgramacion3v2.dir/ProyectoProgramacion3v2_autogen/mocs_compilation.cpp.obj	4ba8e358ec3e4784
+926	3643	7706041025042390	CMakeFiles/ProyectoProgramacion3v2.dir/main.cpp.obj	daa3fdc75d64603e
+15	644	7706051265682312	build.ninja	7f2fc635252a8895
+950	1056	7706041025267070	CMakeFiles/ProyectoProgramacion3v2.dir/registrodoctores.cpp.obj	6e9bbf2d819ffefb
+946	1087	7706041025235638	CMakeFiles/ProyectoProgramacion3v2.dir/registropacientes.cpp.obj	bcbf44234078e11c
+177	220	7706050609245034	CMakeFiles/ProyectoProgramacion3v2.dir/menuadmin.cpp.obj	a2d5e1466ed033b9
+188	1826	7706042196899371	CMakeFiles/ProyectoProgramacion3v2.dir/menudoctor.cpp.obj	5887b95f8b5cb751
