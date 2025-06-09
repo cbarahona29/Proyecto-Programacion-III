@@ -15,7 +15,7 @@ Tiene como funcionalidades:
 #include <Paciente/Paciente.h>
 #include <string>
 
-using using std::string;
+using std::string;
 
 class gestorPaciente {
     private:
@@ -35,13 +35,3 @@ class gestorPaciente {
         // Asociar expediente medico (asaber que es eso)
 };
 
-class nodoPaciente {
-    Paciente nodo;
-
-    //
-    Paciente getPaciente ();
-
-    //
-    void siguientePaciente ();
-    void pacienteAnterior ();
-};

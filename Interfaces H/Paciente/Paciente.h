@@ -5,6 +5,7 @@ using std::string;
 
 class Paciente {
     private:
+        Paciente(){} //constructor por defecto
         int ID, numIdentidad, numTelefono;
         string nombre, eMail, genero, fechaNacimiento, direccion;
         
@@ -16,7 +17,7 @@ class Paciente {
             this->fechaNacimiento = fechaNacimiento;
             this->direccion = direccion;
             this->numIdentidad = numIdentidad;
-            this->numtelefono = numtelefono;
+            this->numTelefono = numTelefono;
             this->eMail = eMail;
             this->genero = genero;
         }
@@ -48,5 +49,7 @@ class Paciente {
             return ID == otro.ID;
         }
 
+        friend class ColaPacientes;
+        friend class NodoPaciente; //se declara como clase amiga para que pueda usar su constructor privado
 
 };
