@@ -49,7 +49,6 @@ class Paciente {
             return ID == otro.ID;
         }
 
-        friend class ColaPacientes;
         friend class NodoPaciente; //se declara como clase amiga para que pueda usar su constructor privado
 
 };

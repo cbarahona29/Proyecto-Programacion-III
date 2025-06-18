@@ -1,4 +1,6 @@
 #include "NodoPaciente.h"
+#include <vector>
+using namespace std;
 
 class ColaPacientes{
     private:
@@ -22,6 +24,18 @@ class ColaPacientes{
         }
     }
 
+    vector<Paciente> obtenerPacientes() const{
+        vector<Paciente> pacientes;
+        NodoPaciente* nodoActual = frente;
+
+        while(nodoActual!=nullptr){
+            pacientes.push_back(nodoActual->getPaciente()); //agregamos el paciente al vector
+            nodoActual = nodoActual->getSiguiente();
+        }
+
+        return pacientes;
+    }
+
     Paciente* pop(){//eliminar al primer paciente de la cola
         if(estaVacia()){
             return nullptr; // la cola ya esta vacia
@@ -39,8 +53,9 @@ class ColaPacientes{
         return pacienteAtendido; //se retorna para mejor orden 
     }
 
-    bool estaVacia(){
+    bool estaVacia() const{
         return frente == nullptr;
     }
+
 
 };

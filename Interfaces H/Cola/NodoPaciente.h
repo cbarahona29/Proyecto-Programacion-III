@@ -7,18 +7,21 @@ class NodoPaciente {
         nodoSiguiente = nullptr;
     }
     
-    NodoPaciente* getSiguiente(){
+    NodoPaciente* getSiguiente() const{
         return nodoSiguiente;
     }
 
-    Paciente getPaciente() {
+    Paciente getPaciente() const {
         return paciente;
     }
 
     void setSiguiente(NodoPaciente* nodoPaciente){
         nodoSiguiente = nodoPaciente;
     }
+    friend class ColaPacientes;
+    
     private:
+    NodoPaciente(){}; //constructor por defecto;
     Paciente paciente;
     NodoPaciente* nodoSiguiente;
 };
