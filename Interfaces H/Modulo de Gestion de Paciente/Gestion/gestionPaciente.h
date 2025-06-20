@@ -10,28 +10,44 @@ Tiene como funcionalidades:
 - Mostrar listado completo o filtrado de pacientes
 - Eliminar un paciente (con verificacion de seguridad)
 - Asociar expediente medico
+
+*** nota **
+!!! La cola de pacientes en esta clase es general y no la fila de espera, no confundir !!!
 */
 #include <iostream>
-#include <Paciente/Paciente.h>
 #include <string>
+
+// Inclusion de Objetos de Paciente
+#include "Paciente/Paciente.h"
+#include "Paciente/ExpedienteMedico.h"
+#include "Paciente/ConsultaMedica.h"
+
+// Inclusion de Objetos de Colas
+#include "Cola/ColaPacientes.h";
 
 using std::string;
 
 class gestorPaciente {
     private:
-
+        ColaPacientes colaPacientesTotal;
     public:
+
         // Busqueda de Pacientes
         Paciente buscarPaciente (int ID);
         Paciente buscarPaciente (int numIdentidad);
-        Paciente buscarPaciente (string nombre);
+        Paciente buscarPaciente (const string& nombre);
 
         // Registro de Pacientes
         void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero);
 
-        // 
-        bool eliminarPaciente (Paciente paciente);
+        // Eliminar
+        bool eliminarPaciente (const Paciente& paciente);
 
-        // Asociar expediente medico (asaber que es eso)
+        // Expediente Clinico
+        ExpedienteMedico consultarExpediente (const Paciente& paciente);
+        void registrarConsulta (const Paciente& paciente, const ConsultaMedica& consulta);
+
+        // Mostrar Pacientes    -   Falta filtrado
+        string mostrarPacientes ();
 };
 

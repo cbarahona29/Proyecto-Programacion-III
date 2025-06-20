@@ -11,7 +11,7 @@ class Medico {
 
     public:
         // Constructor
-        Profesional(int id, int colegiacion, string nombre, bool disponible) {
+        Medico(int id, int colegiacion, string nombre, bool disponible) {
             ID = id;
             numColegiacion = colegiacion;
             this->nombre = nombre;
