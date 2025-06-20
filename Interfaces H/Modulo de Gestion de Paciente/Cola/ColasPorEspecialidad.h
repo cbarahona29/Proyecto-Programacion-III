@@ -56,4 +56,30 @@ class ColasPorEspecialidad{
 
         }
     };
+
+    string mostrarColasFiltradas(const string& especialidadD){
+        string resultado="";
+        if(estaVacia(especialidadD)){
+            resultado+= "No hay pacientes en la fila de espera de " + especialidadD;
+            return resultado;
+        }
+
+        for (const auto& iteracion: mapaColas){
+            const string& especialidad = iteracion.first; //primera clave del mapa
+            const ColaPacientes& colaIteracion = iteracion.second; //segunda clave del mapa
+
+            if (especialidad == especialidadD){
+
+            }
+            resultado+= "\n---------------"+ especialidad + "---------------";
+            vector<Paciente> pacientes = colaIteracion.obtenerPacientes();
+
+            for (Paciente& paciente : pacientes){
+                resultado+="-" + paciente.getNombre() + "\n";
+            }
+
+        }
+        return resultado;
+        
+    }
 };
