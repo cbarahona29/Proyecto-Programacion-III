@@ -8,7 +8,9 @@ class Medico {
         int ID, numColegiacion;
         string nombre;
         bool disponible;
+        string especialidad;
 
+        Medico(){};
     public:
         // Constructor
         Medico(int id, int colegiacion, string nombre, bool disponible) {
@@ -30,4 +32,6 @@ class Medico {
         void setNumColegiacion(int colegiacion) { numColegiacion = colegiacion; }
         void setNombre(string nuevoNombre) { nombre = nuevoNombre; }
         void setDisponible(bool estado) { disponible = estado; }
+
+        friend class ConsultaMedica;
 };

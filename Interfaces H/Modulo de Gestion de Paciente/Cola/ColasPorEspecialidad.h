@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include "ColaPacientes.h"
+#include "ConsultaMedica.h"
+#include "Medico.h"
 #include "Paciente.h"
 
 using namespace std;
@@ -11,7 +13,6 @@ class ColasPorEspecialidad{
         map <string, ColaPacientes> mapaColas;
 
     public:
-
     void agregarPaciente(const Paciente& paciente, const string& especialidad){
         //& pq es una referencia(no crear copias inecesarias) y const para que no se puedan modificar
         mapaColas[especialidad].push(paciente);
@@ -22,17 +23,19 @@ class ColasPorEspecialidad{
         return locMapa == mapaColas.end() || locMapa->second.estaVacia();
     };
     
-    Paciente* atenderSiguientePaciente(const string& especialidad){
+    Paciente* atenderSiguientePaciente(const string& especialidad, const Medico& medico,
+        string motivo, string diagnostico, string tratamiento, string notas, string fecha ){
         if(mapaColas.find(especialidad) == mapaColas.end()){
             return nullptr; //no se encontro la especialidad
         }
 
         Paciente* paciente = mapaColas[especialidad].pop(); //eliminar al paciente de la cola
         if(paciente){ //si se encontro un paciente y se elimino
-            //se atencio x paciente
+            ConsultaMedica consultaRealizada= ConsultaMedica(medico,motivo,diagnostico,tratamiento,notas,fecha);
+            ///FALTA AGREGAR AL EXPEDIENTE DEL PACIENTE
         }
-        else{
-            //no se encontro paciente
+        else{//no se encontro el paciente
+            return nullptr;
         }
         return paciente; //despues se debe borrar el espacio en memoria de este al llamar la funcion
     };
@@ -55,6 +58,7 @@ class ColasPorEspecialidad{
             }
 
         }
+         return resultado;
     };
 
     string mostrarColasFiltradas(const string& especialidadD){
