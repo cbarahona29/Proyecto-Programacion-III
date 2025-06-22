@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include "ColaPacientes.h"
-#include "ConsultaMedica.h"
-#include "Medico.h"
-#include "Paciente.h"
+#include "Modulo de Gestion de Paciente/Paciente/ConsultaMedica.h"
+#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "Modulo de Gestion de Paciente/Paciente/Paciente.h"
 
 using namespace std;
 
