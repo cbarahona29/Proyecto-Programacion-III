@@ -1,4 +1,4 @@
-#include "Paciente.h"
+#include "../Paciente/Paciente.h"
 
 class NodoPaciente {
     public:

@@ -1,6 +1,9 @@
-#include "gestionMedico.h"
+// Libs estandar
 #include <sstream>
 #include <stdexcept>
+
+// Dependencias
+#include "gestionMedica.h"
 
 using std::ostringstream;
 using std::vector;
@@ -60,7 +63,7 @@ vector<Medico> gestionMedica::buscarPorEspecialidad(const string& especialidad) 
 // Editar la informacion de un médico
 bool gestionMedica::editarMedico(int ID, const Medico& datosActualizados) {
     vector<Medico> lista = colaEspecialidad.obtenerTodos();
-    ColaPorEspecialidad nuevaCola;
+    ColasPorEspecialidad nuevaCola;
     bool editado = false;
 
     for (Medico m : lista) {

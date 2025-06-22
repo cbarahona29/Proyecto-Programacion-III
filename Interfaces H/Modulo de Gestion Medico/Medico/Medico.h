@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+using std::string;
+
 class Medico {
 private:
     int ID, numColegiacion, numIdentidad, numTelefono;

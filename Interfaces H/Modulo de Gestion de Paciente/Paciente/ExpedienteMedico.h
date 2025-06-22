@@ -18,7 +18,7 @@ tiene las sieguientes funciones:
 */
 #include <iostream>
 #include <string>
-#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "../../Modulo de Gestion Medico/Medico/Medico.h"
 #include "ConsultaMedica.h"
 
 using std::string;

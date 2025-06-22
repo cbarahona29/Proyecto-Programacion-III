@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include "Medico/Medico.h"
-#include "Cola/ColaPorEspecialidad.h"
+#include "../Medico/Medico.h"
+#include "../../Modulo de Gestion de Paciente/Cola/ColasPorEspecialidad.h"
 
 using std::string;
 
-class gestorMedico {
+class gestionMedica {
 private:
     ColaPorEspecialidad colaEspecialidad;
     int ultimoID = 0; // Para autogenerar ID
