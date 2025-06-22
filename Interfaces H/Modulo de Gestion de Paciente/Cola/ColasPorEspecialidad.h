@@ -86,4 +86,31 @@ class ColasPorEspecialidad{
         return resultado;
         
     }
+
+    int contarPacientes(const string& especialidadDeseada){
+        int pacientesEnFila=0;
+
+         for (const auto& iteracion: mapaColas){
+            const string& especialidad = iteracion.first; //primera clave del mapa
+            const ColaPacientes& colaIteracion = iteracion.second; //segunda clave del mapa
+
+            if (especialidad == especialidadDeseada){
+                vector<Paciente> pacientes = colaIteracion.obtenerPacientes();
+
+                for (Paciente& paciente : pacientes){
+                    pacientesEnFila++;
+                }
+            }
+
+            return pacientesEnFila;
+        }
+    }
+
+    vector <string> obtenerEspecialidades(){
+        vector<string> especialidades;
+        for (const auto& ind: mapaColas){
+            especialidades.push_back(ind.first);
+        }
+        return especialidades;
+    }
 };
