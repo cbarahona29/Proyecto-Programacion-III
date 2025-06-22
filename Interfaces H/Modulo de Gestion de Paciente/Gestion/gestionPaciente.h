@@ -50,3 +50,5 @@ class gestorPaciente {
         // Mostrar Pacientes    -   Falta filtrado
         string mostrarPacientes ();
 };
+
+

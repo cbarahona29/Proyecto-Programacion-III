@@ -1,41 +1,39 @@
-/*
-Modulo de gestion de medicos
-Tiene como funcionalidades:
-Registrar médicos con los siguientes datos:
-   ~ ID de médico (autogenerado)
-   ~ Nombre completo
-   ~ Especialidad (cardiología, pediatría, medicina general, etc.)
-   ~ Estado (disponible / ocupado)
-   ~ Número de colegiación
-- Editar la información de un médico.
-- Buscar médicos por ID, nombre o especialidad.
-- Marcar como disponible u ocupado (al asignar consultas).
--Listar todos los médicos o por especialidad
-*/
+#ifndef GESTOR_MEDICO_H
+#define GESTOR_MEDICO_H
+
 #include <iostream>
 #include <string>
-
-// Inclusion de Objetos de Medicos
 #include "Medico/Medico.h"
-
-// Inclusion de Objetos de Colas
 #include "Cola/ColaPorEspecialidad.h"
 
-class gestorMedico(){
-    private:
-        ColaPorEspecialidad colaEspecialidad;
-    public:
+using std::string;
 
-    // Busqueda de Medico
-        Medico buscarMedico (int ID);
-        Medico buscarMedico (int numIdentidad);
-        Medico buscarMedico (const string& nombre);
+class gestorMedico {
+private:
+    ColaPorEspecialidad colaEspecialidad;
+    int ultimoID = 0; // Para autogenerar ID
 
-    // Registro de Pacientes o Modificar
-        void registrarMedico (int ID, int colegiacion, int numIdentidad, int numTelefono, string nombre, string especialidad, string fechaNacimiento, string eMail);
+public:
+    // Registro
+    void registrarMedico(int colegiacion, int numIdentidad, int numTelefono, const string& nombre, const string& especialidad,const string& fechaNacimiento, const string& eMail);
 
+    // Buscar médico por ID, identidad o nombre
+    Medico buscarMedico(int ID);
+    Medico buscarMedicoPorIdentidad(int numIdentidad);
+    Medico buscarMedico(const string& nombre);
+    vector<Medico> buscarPorEspecialidad(const string& especialidad);
 
-    //Verificar si esta ocupado
-        bool estaOcupado(bool disponible); 
+    // Editar información del médico
+    bool editarMedico(int ID, const Medico& datosActualizados);
 
+    // Cambiar estado del médico
+    bool marcarDisponible(int ID);
+    bool marcarOcupado(int ID);
+    bool estaOcupado(int ID);
+
+    // Listar médicos
+    string listarMedicos();
+    string listarPorEspecialidad(const string& especialidad);
 };
+
+#endif
