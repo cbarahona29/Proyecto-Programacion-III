@@ -12,6 +12,8 @@ Clase Consulta Medica
     o Notas adicionales
 
 */
+#pragma once
+
 #include <iostream>
 #include <string>
 #include "Modulo de Gestion Medico/Medico/Medico.h"
@@ -25,18 +27,14 @@ class ConsultaMedica {
 
     public:
         // Constructor
-        ConsultaMedica (Medico medico, string motivo, string diagnostico, string tratamiento, string notas, string fecha) {
-            medicoResponsable = medico;
-            motivoConsulta = motivo;
-            this->diagnostico = diagnostico;
-            this->tratamiento = tratamiento;
-            notasExtra = notas;
-            fechaConsulta = fecha;
-
-        }
-        Medico getMedicoResponsable() const {
-        return medicoResponsable;
-    }
+        ConsultaMedica(Medico medico, string motivo, string diagnostico, string tratamiento, string notas, string fecha)
+        :   medicoResponsable(medico), 
+            motivoConsulta(motivo), 
+            diagnostico(diagnostico),
+            tratamiento(tratamiento), 
+            notasExtra(notas), 
+            fechaConsulta(fecha) {}
+        
 
     // Getters & Setters
     void setMedicoResponsable(const Medico& medico) {

@@ -27,15 +27,15 @@ Tiene como funcionalidades:
 
 using std::string;
 
-class gestorPaciente {
+class gestionPaciente {
     private:
-        ColaPacientes colaPacientesTotal;
+        ColaPacientes pacientes;
     public:
 
         // Busqueda de Pacientes
-        Paciente buscarPaciente (int ID);
-        Paciente buscarPaciente (int numIdentidad);
-        Paciente buscarPaciente (const string& nombre);
+        Paciente* buscarPaciente (int ID);
+        Paciente* buscarPacientePorIdentidad (int numIdentidad);
+        Paciente* buscarPacientePorNombre (const string& nombre);
 
         // Registro de Pacientes
         void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero,string alergias);
