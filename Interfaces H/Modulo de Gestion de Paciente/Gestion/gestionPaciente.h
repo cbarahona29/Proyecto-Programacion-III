@@ -23,7 +23,7 @@ Tiene como funcionalidades:
 #include "Paciente/ConsultaMedica.h"
 
 // Inclusion de Objetos de Colas
-#include "Cola/ColaPacientes.h";
+#include "Cola/ColaPacientes.h"
 
 using std::string;
 
@@ -38,7 +38,7 @@ class gestorPaciente {
         Paciente buscarPaciente (const string& nombre);
 
         // Registro de Pacientes
-        void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero);
+        void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero,string alergias);
 
         // Eliminar
         bool eliminarPaciente (const Paciente& paciente);
@@ -50,4 +50,3 @@ class gestorPaciente {
         // Mostrar Pacientes    -   Falta filtrado
         string mostrarPacientes ();
 };
-

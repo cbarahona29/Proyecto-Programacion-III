@@ -7,11 +7,11 @@ class Paciente {
     private:
         Paciente(){} //constructor por defecto
         int ID, numIdentidad, numTelefono;
-        string nombre, eMail, genero, fechaNacimiento, direccion;
+        string nombre, eMail, genero, fechaNacimiento, direccion, alergias;
         
     public:
         // Constructor
-        Paciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero) {
+        Paciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero, string alergias) {
             this->ID = ID;
             this->nombre = nombre;
             this->fechaNacimiento = fechaNacimiento;
@@ -20,6 +20,7 @@ class Paciente {
             this->numTelefono = numTelefono;
             this->eMail = eMail;
             this->genero = genero;
+            this->alergias= alergias;
         }
 
         // Getters
@@ -32,6 +33,7 @@ class Paciente {
         string getGenero() { return genero; }
         string getFechaNacimiento() { return fechaNacimiento; }
         string getDireccion() { return direccion; }
+        string getAlergias() { return alergias; }
 
         // Setters
         void setID(int ID) { this->ID = ID; }
@@ -43,6 +45,7 @@ class Paciente {
         void setGenero(string genero) { this->genero = genero; }
         void setFechaNacimiento(string fecha) { fechaNacimiento = fecha; }
         void setDireccion(string direccion) { this->direccion = direccion; }
+        void setAlergias(string alergias) {this->alergias= alergias; }
 
         // Sobre carga de Operadores
         bool operator== (const Paciente& otro) const {

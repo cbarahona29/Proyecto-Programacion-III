@@ -5,19 +5,20 @@ using std::string;
 
 class Medico {
     private:
-        int ID, numColegiacion;
-        string nombre;
+        int ID, numColegiacion, numIdentidad, numTelefono;
+        string nombre, especialidad, fechaNacimiento, eMail ;
         bool disponible;
-        string especialidad;
 
-        Medico(){};
     public:
         // Constructor
-        Medico(int id, int colegiacion, string nombre, bool disponible) {
+        Medico(int id, int colegiacion, int numIdentidad, int numTelefono, string nombre, string especialidad, string fechaNacimiento, string eMail, bool disponible) {
             ID = id;
             numColegiacion = colegiacion;
+            this->numIdentidad= numIdentidad;
             this->nombre = nombre;
             this->especialidad = especialidad;
+            this->fechaNacimiento= fechaNacimiento;
+            this->eMail= eMail;
             this->disponible = disponible;
         }
 
@@ -31,7 +32,5 @@ class Medico {
         void setID(int id) { ID = id; }
         void setNumColegiacion(int colegiacion) { numColegiacion = colegiacion; }
         void setNombre(string nuevoNombre) { nombre = nuevoNombre; }
-        void setDisponible(bool estado) { disponible = estado; }
-
-        friend class ConsultaMedica;
+        void setDisponible(bool estado) { disponible = estado; }
 };
