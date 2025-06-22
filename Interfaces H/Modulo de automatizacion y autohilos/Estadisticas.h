@@ -24,7 +24,7 @@ class Estadisticas{
         resultado+="-------Medicos disponibles-------\n";
         int medDisponibles=0;
         for(const auto& ind: medicos){
-            if(ind.second->isDisponible()){
+            if(ind.second->estaDisponible()){
                 resultado+=ind.second->getNombre() + "\n";
                 medDisponibles++;
             }
