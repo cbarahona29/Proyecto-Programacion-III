@@ -16,7 +16,7 @@
 #include <string>
 
 // Archivos 
-#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "../Modulo de Gestion Medico/Medico/Medico.h"
 
 namespace fs = std::filesystem;
 using std::string;

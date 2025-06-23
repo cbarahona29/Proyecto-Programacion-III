@@ -10,7 +10,7 @@ using std::string;
 
 class gestionMedica {
 private:
-    ColaPorEspecialidad colaEspecialidad;
+    ColasPorEspecialidad colaEspecialidad;
     int ultimoID = 0; // Para autogenerar ID
 
 public:

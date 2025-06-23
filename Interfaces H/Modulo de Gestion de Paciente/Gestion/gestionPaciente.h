@@ -18,12 +18,12 @@ Tiene como funcionalidades:
 #include <string>
 
 // Inclusion de Objetos de Paciente
-#include "Paciente/Paciente.h"
-#include "Paciente/ExpedienteMedico.h"
-#include "Paciente/ConsultaMedica.h"
+#include "../Paciente/Paciente.h"
+#include "../Paciente/ExpedienteMedico.h"
+#include "../Paciente/ConsultaMedica.h"
 
 // Inclusion de Objetos de Colas
-#include "Cola/ColaPacientes.h"
+#include "../Cola/ColaPacientes.h"
 
 using std::string;
 

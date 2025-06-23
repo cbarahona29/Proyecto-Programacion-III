@@ -57,12 +57,4 @@ class ColaPacientes{
         return frente == nullptr;
     }
 
-    Paciente* searchPaciente () {
-        if (estaVacia()){
-            return false;
-        }
-
-        
-    }
-
 };

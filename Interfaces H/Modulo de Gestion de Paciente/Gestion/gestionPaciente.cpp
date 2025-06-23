@@ -47,7 +47,7 @@ bool gestionPaciente::eliminarPaciente(const Paciente& paciente) {
 
     for (auto& p : vectorPaciente) {
         if (p == paciente) {
-            pacientes.erase(p);
+            //pacientes.erase(p);
             return true;
         }
     }
@@ -70,4 +70,21 @@ void gestionPaciente::registrarConsulta(const Paciente& paciente, const Consulta
 // Mostrar todos los pacientes
 std::string gestionPaciente::mostrarPacientes() {
     
+}
+
+int main () {
+
+    std::cout << "Valor de __cplusplus: " << __cplusplus << "\n";
+
+#if __cplusplus >= 202002L
+    std::cout << "C++20 o superior\n";
+#elif __cplusplus >= 201703L
+    std::cout << "C++17\n";
+#elif __cplusplus >= 201402L
+    std::cout << "C++14\n";
+#elif __cplusplus >= 201103L
+    std::cout << "C++11\n";
+#else
+    std::cout << "Versión antigua de C++\n";
+#endif
 }

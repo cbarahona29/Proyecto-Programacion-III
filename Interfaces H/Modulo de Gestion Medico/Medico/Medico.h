@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using std::string;
 
@@ -50,4 +51,20 @@ public:
     bool operator==(const Medico& otro) const {
         return this->ID == otro.ID;
     }
+
+    string toString() const {
+    std::ostringstream oss;
+    oss << "ID: " << getID() << "\n"
+        << "Num. Colegiación: " << getNumColegiacion() << "\n"
+        << "Num. Identidad: " << getNumIdentidad() << "\n"
+        << "Teléfono: " << getNumTelefono() << "\n"
+        << "Nombre: " << getNombre() << "\n"
+        << "Especialidad: " << getEspecialidad() << "\n"
+        << "Fecha de Nacimiento: " << getFechaNacimiento() << "\n"
+        << "Email: " << getEmail() << "\n"
+        << "Disponible: " << (estaDisponible() ? "Sí" : "No");
+    return oss.str();
+}
+
+
 };
