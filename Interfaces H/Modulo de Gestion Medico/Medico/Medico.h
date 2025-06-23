@@ -13,17 +13,9 @@ private:
 
 public:
     // Constructor
-    Medico(int id, int colegiacion, int numIdentidad, int numTelefono, string nombre, string especialidad, string fechaNacimiento,string eMail, bool disponible) {
-        ID = id;
-        numColegiacion = colegiacion;
-        this->numIdentidad = numIdentidad;
-        this->numTelefono = numTelefono;
-        this->nombre = nombre;
-        this->especialidad = especialidad;
-        this->fechaNacimiento = fechaNacimiento;
-        this->eMail = eMail;
-        this->disponible = disponible;
-    }
+    Medico() : ID(0), numColegiacion(0), numIdentidad(0), numTelefono(0), 
+           nombre(""), especialidad(""), fechaNacimiento(""), eMail(""), disponible(true) {}
+
 
     // Getters
     int getID() const { return ID; }
