@@ -26,8 +26,8 @@ class Paciente {
         }
 
         // Constructor en caso de no ser encontrado
-        bool existe;
-        Paciente (bool existe) : existe(existe) {}
+        bool Existe;
+        Paciente (bool existe) : existe(Existe) {}
 
         // Getters
         int getID() const { return ID; }
