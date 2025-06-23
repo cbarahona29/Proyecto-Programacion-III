@@ -32,6 +32,23 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MenuRecepcionista.h MenuRecepcionista.cpp
         registromed.h registromed.cpp
         registropaciente.h registropaciente.cpp
+        ajustes.h ajustes.cpp
+        FilaEspera.cpp
+        filaespera.h filaespera.cpp
+        Estructuras.h
+        guardamedico.h guardamedico.cpp
+        Medico.h
+        guardapaciente.h guardapaciente.cpp
+        Paciente.h
+        ExpedienteMedico.h
+        ExpedienteMedico.cpp
+        ConsultaMedica.h
+
+
+        ColaPacientes.h
+        NodoPaciente.h
+        ColasPorEspecialidad.h
+
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -1,5 +1,6 @@
 C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/untitled_autogen/EWIEGA46WW/moc_MenuAdmin.cpp: C:/Users/danilos/Documents/untitled/MenuAdmin.h \
   C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/untitled_autogen/moc_predefs.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QDate \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QDeadlineTimer \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QEvent \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QHash \
@@ -420,11 +421,15 @@ C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/un
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowsmimeconverter.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QCommonStyle \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGridLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QHBoxLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListWidget \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollerProperties \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout \
@@ -902,5 +907,8 @@ C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/un
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/danilos/Documents/untitled/Ajustes.h \
+  C:/Users/danilos/Documents/untitled/Estructuras.h \
+  C:/Users/danilos/Documents/untitled/FilaEspera.h \
   C:/Users/danilos/Documents/untitled/registromed.h \
   C:/Users/danilos/Documents/untitled/registropaciente.h

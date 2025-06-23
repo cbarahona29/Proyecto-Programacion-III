@@ -2,6 +2,8 @@
 #include "EWIEGA46WW/moc_Login.cpp"
 #include "EWIEGA46WW/moc_MenuAdmin.cpp"
 #include "EWIEGA46WW/moc_MenuDr.cpp"
+#include "EWIEGA46WW/moc_ajustes.cpp"
+#include "EWIEGA46WW/moc_filaespera.cpp"
 #include "EWIEGA46WW/moc_menurecepcionista.cpp"
 #include "EWIEGA46WW/moc_registromed.cpp"
 #include "EWIEGA46WW/moc_registropaciente.cpp"

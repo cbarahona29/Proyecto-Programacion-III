@@ -332,9 +332,45 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/danilos/Documents/untitled/ColaPacientes.h",
+			"MU",
+			"EWIEGA46WW/moc_ColaPacientes.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/ColasPorEspecialidad.h",
+			"MU",
+			"EWIEGA46WW/moc_ColasPorEspecialidad.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/ConsultaMedica.h",
+			"MU",
+			"EWIEGA46WW/moc_ConsultaMedica.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/Estructuras.h",
+			"MU",
+			"EWIEGA46WW/moc_Estructuras.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/ExpedienteMedico.h",
+			"MU",
+			"EWIEGA46WW/moc_ExpedienteMedico.cpp",
+			null
+		],
+		[
 			"C:/Users/danilos/Documents/untitled/Login.h",
 			"MU",
 			"EWIEGA46WW/moc_Login.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/Medico.h",
+			"MU",
+			"EWIEGA46WW/moc_Medico.cpp",
 			null
 		],
 		[
@@ -347,6 +383,42 @@
 			"C:/Users/danilos/Documents/untitled/MenuDr.h",
 			"MU",
 			"EWIEGA46WW/moc_MenuDr.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/NodoPaciente.h",
+			"MU",
+			"EWIEGA46WW/moc_NodoPaciente.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/Paciente.h",
+			"MU",
+			"EWIEGA46WW/moc_Paciente.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/ajustes.h",
+			"MU",
+			"EWIEGA46WW/moc_ajustes.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/filaespera.h",
+			"MU",
+			"EWIEGA46WW/moc_filaespera.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/guardamedico.h",
+			"MU",
+			"EWIEGA46WW/moc_guardamedico.cpp",
+			null
+		],
+		[
+			"C:/Users/danilos/Documents/untitled/guardapaciente.h",
+			"MU",
+			"EWIEGA46WW/moc_guardapaciente.cpp",
 			null
 		],
 		[
@@ -439,9 +511,18 @@
 	"SETTINGS_FILE" : "C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/CMakeFiles/untitled_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/danilos/Documents/untitled/ExpedienteMedico.cpp",
+			"MU",
+			null
+		],
 		[ "C:/Users/danilos/Documents/untitled/Login.cpp", "MU", null ],
 		[ "C:/Users/danilos/Documents/untitled/MenuAdmin.cpp", "MU", null ],
 		[ "C:/Users/danilos/Documents/untitled/MenuDr.cpp", "MU", null ],
+		[ "C:/Users/danilos/Documents/untitled/ajustes.cpp", "MU", null ],
+		[ "C:/Users/danilos/Documents/untitled/filaespera.cpp", "MU", null ],
+		[ "C:/Users/danilos/Documents/untitled/guardamedico.cpp", "MU", null ],
+		[ "C:/Users/danilos/Documents/untitled/guardapaciente.cpp", "MU", null ],
 		[ "C:/Users/danilos/Documents/untitled/main.cpp", "MU", null ],
 		[
 			"C:/Users/danilos/Documents/untitled/menurecepcionista.cpp",

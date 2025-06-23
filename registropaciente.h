@@ -1,5 +1,4 @@
-#ifndef REGISTROPACIENTE_H
-#define REGISTROPACIENTE_H
+#pragma once
 
 #include <QWidget>
 #include <QVBoxLayout>
@@ -21,26 +20,26 @@ private slots:
     void registrarPaciente();
     void regresar();
 
+signals:
+    void regresarAlMenu();
+
 private:
+    // Métodos privados
     void configurarUI();
     void configurarEventos();
     void limpiarCampos();
+    void generarProximoID(); // Nuevo método
 
-    // Controles de UI
-    QLineEdit* txtNombre;
-    QLineEdit* txtTelefono;
-    QLineEdit* txtEdad;
-    QLineEdit* txtGenero;
+    // Controles de la interfaz
+    QLineEdit* txtId;
+    QLineEdit* txtDireccion;
     QLineEdit* txtIdentidad;
+    QLineEdit* txtNumTelefono;
+    QLineEdit* txtNombre;
     QLineEdit* txtFechaNacimiento;
+    QLineEdit* txtEmail;
     QComboBox* cmbAlergias;
-    QLineEdit* txtCorreo;
-
+    QComboBox* cmbGenero; // Nuevo campo
     QPushButton* btnRegistrar;
     QPushButton* btnRegresar;
-
-signals:
-    void regresarAlMenu();
 };
-
-#endif // REGISTROPACIENTE_H

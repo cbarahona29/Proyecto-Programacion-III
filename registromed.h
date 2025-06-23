@@ -25,17 +25,17 @@ private:
     void configurarUI();
     void configurarEventos();
     void limpiarCampos();
+    void generarProximoID(); // Nueva función para generar ID automático
 
     // Controles de UI
-    QLineEdit* txtNombre;
-    QLineEdit* txtTelefono;
-    QLineEdit* txtEdad;
-    QLineEdit* txtGenero;
+    QLineEdit* txtId;
+    QLineEdit* txtColegiacion;
     QLineEdit* txtIdentidad;
-    QLineEdit* txtFechaNacimiento;
+    QLineEdit* txtNumTelefono;
+    QLineEdit* txtNombre;
     QComboBox* cmbEspecialidad;
-    QLineEdit* txtCorreo;
-
+    QLineEdit* txtFechaNacimiento;
+    QLineEdit* txtEmail;
     QPushButton* btnRegistrar;
     QPushButton* btnRegresar;
 
