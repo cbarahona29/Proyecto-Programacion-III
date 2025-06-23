@@ -15,18 +15,19 @@ class Paciente {
 
     public:
         // Constructor
-        Paciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero, string alergias) {
-            this->ID = ID;
-            this->nombre = nombre;
-            this->fechaNacimiento = fechaNacimiento;
-            this->direccion = direccion;
-            this->numIdentidad = numIdentidad;
-            this->numTelefono = numTelefono;
-            this->eMail = eMail;
-            this->genero = genero;
-            this->alergias= alergias;
-            expediente ();
+        Paciente(int ID, string nombre, string fechaNacimiento, string direccion, int numIdentidad, int numTelefono, string eMail, string genero, string alergias)
+        :   ID(ID), nombre(nombre),  
+            fechaNacimiento(fechaNacimiento),
+            direccion(direccion), numIdentidad(numIdentidad),
+            numTelefono(numTelefono), eMail(eMail),
+            genero(genero), alergias(alergias) {
+                
+                expediente = ExpedienteMedico(); 
         }
+
+        // Constructor en caso de no ser encontrado
+        bool existe;
+        Paciente (bool existe) : existe(existe) {}
 
         // Getters
         int getID() const { return ID; }
@@ -34,7 +35,7 @@ class Paciente {
         int getNumTelefono() const { return numTelefono; }
 
         string getNombre() const { return nombre; }
-        string getEMail() const { return eMail; }
+        string getEmail() const { return eMail; }
         string getGenero() const { return genero; }
         string getFechaNacimiento() const { return fechaNacimiento; }
         string getDireccion() const { return direccion; }
@@ -52,6 +53,8 @@ class Paciente {
         void setFechaNacimiento(string fecha) { fechaNacimiento = fecha; }
         void setDireccion(string direccion) { this->direccion = direccion; }
         void setAlergias(string alergias) {this->alergias= alergias; }
+
+        void setExpediente (ExpedienteMedico expediente) {this->expediente = expediente;}
 
         // Sobre carga de Operadores
         bool operator== (const Paciente& otro) const {

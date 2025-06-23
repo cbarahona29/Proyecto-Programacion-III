@@ -18,18 +18,26 @@ tiene las sieguientes funciones:
 */
 #pragma once // por error de inclusiones multiples
 
+//
 #include <iostream>
+#include <vector>
 #include <string>
+
+//
 #include "../../Modulo de Gestion Medico/Medico/Medico.h"
 #include "ConsultaMedica.h"
 
+
 using std::string;
- 
+using std::vector; 
+
 class ExpedienteMedico {
     private: 
-
+        vector<ConsultaMedica> consultas;
     public:
-        string visualizarExpediente ();
+        ExpedienteMedico () {}
+
+        vector<ConsultaMedica> visualizarExpediente ();
         
         void agregarConsulta (const ConsultaMedica& consulta);
         void agregarConsulta (Medico medico, string motivo, string diagnostico, string tratamiento, string notas, string fecha);

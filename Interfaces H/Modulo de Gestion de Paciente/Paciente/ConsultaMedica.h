@@ -35,6 +35,7 @@ class ConsultaMedica {
             notasExtra(notas), 
             fechaConsulta(fecha) {}
         
+        ConsultaMedica () {} // Al momento de leerlos del archivo binario se usa uno sin parametros
 
     // Getters & Setters
     void setMedicoResponsable(const Medico& medico) {
