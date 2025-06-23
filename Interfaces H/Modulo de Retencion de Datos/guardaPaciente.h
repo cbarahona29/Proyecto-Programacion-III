@@ -23,9 +23,9 @@
 #include <string>
 
 // Archivos 
-#include "Modulo de Gestion de Paciente/Paciente/Paciente.h"
-#include "Modulo de Gestion de Paciente/Paciente/ExpedienteMedico.h"
-#include "Modulo de Gestion de Paciente/Paciente/ConsultaMedica.h"
+#include "../Modulo de Gestion de Paciente/Paciente/Paciente.h"
+#include "../Modulo de Gestion de Paciente/Paciente/ExpedienteMedico.h"
+#include "../Modulo de Gestion de Paciente/Paciente/ConsultaMedica.h"
 
 namespace fs = std::filesystem;
 using std::string;

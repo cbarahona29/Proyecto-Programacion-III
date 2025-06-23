@@ -1,5 +1,9 @@
+#pragma once // Por errores de inclusion multiples
+
 #include <iostream>
 #include <string>
+
+using std::string;
 
 class Medico {
 private:

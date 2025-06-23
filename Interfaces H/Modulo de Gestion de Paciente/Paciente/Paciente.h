@@ -1,5 +1,8 @@
+#pragma once
+
 #include <iostream>
 #include <string>
+#include "ExpedienteMedico.h"
 
 using std::string;
 
@@ -8,7 +11,8 @@ class Paciente {
         Paciente(){} //constructor por defecto
         int ID, numIdentidad, numTelefono;
         string nombre, eMail, genero, fechaNacimiento, direccion, alergias;
-        
+        ExpedienteMedico expediente;
+
     public:
         // Constructor
         Paciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero, string alergias) {
@@ -21,19 +25,21 @@ class Paciente {
             this->eMail = eMail;
             this->genero = genero;
             this->alergias= alergias;
+            expediente ();
         }
 
         // Getters
-        int getID() { return ID; }
-        int getNumIdentidad() { return numIdentidad; }
-        int getNumTelefono() { return numTelefono; }
+        int getID() const { return ID; }
+        int getNumIdentidad() const { return numIdentidad; }
+        int getNumTelefono() const { return numTelefono; }
 
-        string getNombre() { return nombre; }
-        string getEMail() { return eMail; }
-        string getGenero() { return genero; }
-        string getFechaNacimiento() { return fechaNacimiento; }
-        string getDireccion() { return direccion; }
-        string getAlergias() { return alergias; }
+        string getNombre() const { return nombre; }
+        string getEMail() const { return eMail; }
+        string getGenero() const { return genero; }
+        string getFechaNacimiento() const { return fechaNacimiento; }
+        string getDireccion() const { return direccion; }
+        string getAlergias() const { return alergias; }
+        ExpedienteMedico getExpediente () const {return expediente;}
 
         // Setters
         void setID(int ID) { this->ID = ID; }

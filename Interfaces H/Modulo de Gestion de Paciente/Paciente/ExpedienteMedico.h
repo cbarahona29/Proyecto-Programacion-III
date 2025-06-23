@@ -16,9 +16,11 @@ tiene las sieguientes funciones:
 
 - Generar reportes clínicos por paciente. 
 */
+#pragma once // por error de inclusiones multiples
+
 #include <iostream>
 #include <string>
-#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "../../Modulo de Gestion Medico/Medico/Medico.h"
 #include "ConsultaMedica.h"
 
 using std::string;
@@ -29,10 +31,11 @@ class ExpedienteMedico {
     public:
         string visualizarExpediente ();
         
-        void crearConsulta (Medico medico, string motivo, string diagnostico, string tratamiento, string notas, string fecha);
+        void agregarConsulta (const ConsultaMedica& consulta);
+        void agregarConsulta (Medico medico, string motivo, string diagnostico, string tratamiento, string notas, string fecha);
         
         ConsultaMedica buscarConsulta (string fecha) ;
-        ConsultaMedica buscarConsulta (string palabraClave);
+        // ConsultaMedica buscarConsulta (string palabraClave); segun el compilador ambos son lo mismo por los parametros
 
         string generarReporteClinico ();
 
