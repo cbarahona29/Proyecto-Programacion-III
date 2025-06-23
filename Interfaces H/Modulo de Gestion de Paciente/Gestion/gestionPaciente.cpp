@@ -3,12 +3,27 @@
 #include <iostream>
 #include <vector>
 
+gestionPaciente::gestionPaciente () {
+    cargarDatos();
+}
+
 // Registro de paciente
 void gestionPaciente::registrarPaciente(int ID, std::string nombre, std::string fechaNacimiento,
                                         std::string direccion, int numIdentidad, int numTelefono,
                                         std::string eMail, std::string genero, std::string alergias) {
+    if (saver.existePaciente(ID)) return;
+
     Paciente nuevo(ID, nombre, fechaNacimiento, direccion, numIdentidad, numTelefono, eMail, genero, alergias);
     pacientes.push(nuevo);
+    saver.registrarPaciente(nuevo);    
+}
+
+void gestionPaciente::cargarDatos() {
+    vector<Paciente> extraccion = saver.extractPacientes();
+
+    for (const auto& paciente : extraccion){
+        pacientes.push(paciente);
+    }
 }
 
 // Buscar por ID
@@ -68,6 +83,6 @@ void gestionPaciente::registrarConsulta(const Paciente& paciente, const Consulta
 }
 
 // Mostrar todos los pacientes
-std::string gestionPaciente::mostrarPacientes() {
-    
+vector<Paciente*> gestionPaciente::mostrarPacientes() {
+    return pacientes.obtenerPacientes();
 }

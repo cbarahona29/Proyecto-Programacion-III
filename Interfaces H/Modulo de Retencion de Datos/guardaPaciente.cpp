@@ -33,6 +33,21 @@ bool guardaPaciente::existePaciente(int ID) {
     return fs::exists(path) && fs::is_directory(path);
 }
 
+vector<Paciente> guardaPaciente::extractPacientes () {
+    string mainFolder = "../../Folders Guarda Datos/Pacientes";
+    vector<Paciente> pacientes;
+
+    for (const auto& entry : fs::directory_iterator(mainFolder)) {
+        if (entry.is_directory() ) {
+            for (const auto& entry2 : fs::directory_iterator(entry.path())){
+                pacientes.push_back(extraerPaciente(entry2.path()));
+            }
+        }
+    }
+
+    return pacientes;
+}
+
 // Crea carpeta para paciente y registra su info
 bool guardaPaciente::registrarPaciente(const Paciente& paciente) {
     int ID = paciente.getID();
@@ -67,6 +82,57 @@ Paciente guardaPaciente::extraerPaciente (int ID) {
     paciente.setExpediente(leerExpediente(ID));
 
     return paciente;
+}
+
+Paciente guardaPaciente::extraerPaciente (const fs::path& carpetaPaciente) {
+    fs::path infoPath;
+    fs::path binPath;
+
+    // Buscar archivos dentro de la carpeta del paciente
+    for (const auto& archivo : fs::directory_iterator(carpetaPaciente)) {
+        if (archivo.path().extension() == ".txt") {
+            infoPath = archivo.path();
+        } else if (archivo.path().extension() == ".bin") {
+            binPath = archivo.path();
+        }
+    }
+
+    // Verificar que ambos archivos existan
+    if (!infoPath.empty() && !binPath.empty()) {
+        ifstream archivo(infoPath);
+
+        int id, identidad, telefono;
+        string nombre, nacimiento, direccion, email, genero, alergias;
+
+        archivo >> id;
+        archivo.ignore(); // para eliminar el \n
+        getline(archivo, nombre);
+        getline(archivo, nacimiento);
+        getline(archivo, direccion);
+        archivo >> identidad;
+        archivo >> telefono;
+        archivo.ignore();
+        getline(archivo, email);
+        getline(archivo, genero);
+        getline(archivo, alergias);
+
+        archivo.close();
+        Paciente paciente = Paciente(id, nombre, nacimiento, direccion, identidad, telefono, email, genero, alergias);
+
+        // Aquí puede leer expediente.bin (por ejemplo, binario puro)
+        std::ifstream archivo2(binPath, std::ios::binary);
+
+        ConsultaMedica c;
+        while (archivo2.read(reinterpret_cast<char*>(&c), sizeof(ConsultaMedica))) {
+            paciente.getExpediente().agregarConsulta(c);  
+        }
+
+        archivo.close();
+        return paciente;
+    } else {
+        std::cerr << "  Archivos faltantes en: " << carpetaPaciente << "\n";
+    }
+    return Paciente(false);
 }
 
 // Extrae info del paciente desde info.txt

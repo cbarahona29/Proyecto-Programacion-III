@@ -24,7 +24,7 @@ class ColaPacientes{
         }
     }
 
-    vector<Paciente*> obtenerPacientes() const{
+    vector<Paciente*> obtenerPacientes() {
         vector<Paciente*> pacientes;
         NodoPaciente* nodoActual = frente;
 

@@ -25,12 +25,17 @@ Tiene como funcionalidades:
 // Inclusion de Objetos de Colas
 #include "../Cola/ColaPacientes.h"
 
+// Inclusion de Objetos de Guardar datos
+#include "../../Modulo de Retencion de Datos/guardaPaciente.cpp"
+
 using std::string;
 
 class gestionPaciente {
     private:
         ColaPacientes pacientes;
+        guardaPaciente saver;
     public:
+        gestionPaciente ();
 
         // Busqueda de Pacientes
         Paciente* buscarPaciente (int ID);
@@ -39,6 +44,9 @@ class gestionPaciente {
 
         // Registro de Pacientes
         void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero,string alergias);
+
+        // Cargar Datos
+        void cargarDatos();
 
         // Eliminar
         bool eliminarPaciente (const Paciente& paciente);
