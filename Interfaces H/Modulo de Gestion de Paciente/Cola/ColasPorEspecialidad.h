@@ -32,7 +32,7 @@ class ColasPorEspecialidad{
         Paciente* paciente = mapaColas[especialidad].pop(); //eliminar al paciente de la cola
         if(paciente){ //si se encontro un paciente y se elimino
             ConsultaMedica consultaRealizada= ConsultaMedica(medico,motivo,diagnostico,tratamiento,notas,fecha);
-            ///FALTA AGREGAR AL EXPEDIENTE DEL PACIENTE
+            paciente->getExpediente().agregarConsulta(consultaRealizada);
         }
         else{//no se encontro el paciente
             return nullptr;
@@ -51,12 +51,10 @@ class ColasPorEspecialidad{
                 resultado+="\nNo hay pacientes en espera";
                 continue;
             }
-            vector<Paciente> pacientes = colaIteracion.obtenerPacientes();
-
-            for (Paciente& paciente : pacientes){
-                resultado+="-" + paciente.getNombre() + "\n";
-            }
-
+            vector<Paciente*> pacientes = colaIteracion.obtenerPacientes();
+                for (Paciente* paciente : pacientes) {  
+                    resultado += "-" + paciente->getNombre() + "\n";  
+                }
         }
          return resultado;
     };
@@ -64,44 +62,32 @@ class ColasPorEspecialidad{
     string mostrarColasFiltradas(const string& especialidadD){
         string resultado="";
         if(estaVacia(especialidadD)){
-            resultado+= "No hay pacientes en la fila de espera de " + especialidadD;
+            resultado += "No hay pacientes en la fila de espera de " + especialidadD;
             return resultado;
         }
 
-        for (const auto& iteracion: mapaColas){
-            const string& especialidad = iteracion.first; //primera clave del mapa
-            const ColaPacientes& colaIteracion = iteracion.second; //segunda clave del mapa
+        auto locMapa = mapaColas.find(especialidadD);
+        if (locMapa != mapaColas.end()) {
+            resultado += "\n---------------"+ especialidadD + "---------------";
+            vector<Paciente*> pacientes = locMapa->second.obtenerPacientes();
 
-            if (especialidad == especialidadD){
-
+            for (Paciente* paciente : pacientes){
+                resultado += "-" + paciente->getNombre() + "\n";
             }
-            resultado+= "\n---------------"+ especialidad + "---------------";
-            vector<Paciente> pacientes = colaIteracion.obtenerPacientes();
-
-            for (Paciente& paciente : pacientes){
-                resultado+="-" + paciente.getNombre() + "\n";
-            }
-
         }
+
         return resultado;
-        
     }
 
     int contarPacientes(const string& especialidadDeseada){
-        int pacientesEnFila=0;
+    int pacientesEnFila = 0;
 
-        for (const auto& iteracion: mapaColas){
-            const string& especialidad = iteracion.first; //primera clave del mapa
-            const ColaPacientes& colaIteracion = iteracion.second; //segunda clave del mapa
-
-            if (especialidad == especialidadDeseada){
-                vector<Paciente> pacientes = colaIteracion.obtenerPacientes();
-
-                for (Paciente& paciente : pacientes){
-                    pacientesEnFila++;
-                }
-            }       
+    auto locMapa = mapaColas.find(especialidadDeseada);
+        if (locMapa != mapaColas.end()) {
+            vector<Paciente*> pacientes = locMapa->second.obtenerPacientes();
+            pacientesEnFila = pacientes.size();
         }
+
         return pacientesEnFila;
     }
 

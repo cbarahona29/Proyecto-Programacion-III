@@ -44,6 +44,7 @@ class gestionPaciente {
 
         // Registro de Pacientes
         void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero,string alergias);
+        void registrarPaciente(Paciente paciente);
 
         // Cargar Datos
         void cargarDatos();
@@ -56,7 +57,7 @@ class gestionPaciente {
         void registrarConsulta (const Paciente& paciente, const ConsultaMedica& consulta);
 
         // Mostrar Pacientes    -   Falta filtrado
-        string mostrarPacientes ();
+        vector<Paciente*> mostrarPacientes ();
 };
 
 

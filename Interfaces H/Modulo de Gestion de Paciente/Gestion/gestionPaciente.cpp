@@ -18,6 +18,11 @@ void gestionPaciente::registrarPaciente(int ID, std::string nombre, std::string 
     saver.registrarPaciente(nuevo);    
 }
 
+void gestionPaciente::registrarPaciente(Paciente paciente) {
+    if (saver.existePaciente(paciente.getID())) return;
+    saver.registrarPaciente(paciente);    
+}
+
 void gestionPaciente::cargarDatos() {
     vector<Paciente> extraccion = saver.extractPacientes();
 
