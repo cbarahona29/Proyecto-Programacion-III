@@ -21,6 +21,7 @@
 #include <iostream>
 #include <filesystem>
 #include <string>
+#include <vector>
 
 // Archivos 
 #include "../Modulo de Gestion de Paciente/Paciente/Paciente.h"
@@ -29,6 +30,7 @@
 
 namespace fs = std::filesystem;
 using std::string;
+using std::vector;
 
 class guardaPaciente {
     private:
@@ -42,12 +44,14 @@ class guardaPaciente {
         void crearMainFolder (); // Para crear el main Paciente folder si no existe
      
 
-        bool existePaciente (string& nombrePaciente); // para chequear si existe paciente (para registrar paciente)
-        
+        bool existePaciente (int ID); // para chequear si existe paciente (para registrar paciente)
+        vector<Paciente> extractPacientes ();
+
         //
         bool registrarPaciente (const Paciente& paciente); // crea un folder para el paciente
         Paciente extraerPaciente (int ID); // Lee el archivo y regresa el objeto pero enteramente
-                
+        Paciente extraerPaciente (const fs::path& carpetaPaciente);
+
                 bool crearExpediente (int ID); // crea el expediente dentro del folder de paciente
                 bool guardarConsulta (const Paciente& , const ConsultaMedica& consulta); // Agrega consulta a expediente
                 ExpedienteMedico leerExpediente (int ID); // Lee el archivo & regresa un objeto de Expediente Clinico
@@ -57,7 +61,7 @@ class guardaPaciente {
         
 
         // Eliminar/Borrar Paciente ***
-        bool borrarExpediente (string& nombrePaciente);
-        bool borrarInfo (string& nombrePaciente);
-        bool borrarPaciente (string& nombrePaciente);
+        bool borrarExpediente (int ID);
+        bool borrarInfo (int ID);
+        bool borrarPaciente (int IDs);
 };

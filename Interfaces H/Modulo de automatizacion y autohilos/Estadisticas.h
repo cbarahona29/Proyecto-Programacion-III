@@ -1,8 +1,8 @@
 #include <thread>
 #include <map>
 #include <string>
-#include "ColasPorEspecialidad.h"
-#include "Medico.h"
+#include "../Modulo de Gestion de Paciente/Cola/ColasPorEspecialidad.h"
+#include "../Modulo de Gestion Medico/Medico/Medico.h"
 using namespace std;
 
 class Estadisticas{

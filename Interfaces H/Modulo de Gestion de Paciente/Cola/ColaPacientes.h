@@ -24,8 +24,8 @@ class ColaPacientes{
         }
     }
 
-    vector<Paciente> obtenerPacientes() const{
-        vector<Paciente> pacientes;
+    vector<Paciente*> obtenerPacientes() {
+        vector<Paciente*> pacientes;
         NodoPaciente* nodoActual = frente;
 
         while(nodoActual!=nullptr){
@@ -56,6 +56,5 @@ class ColaPacientes{
     bool estaVacia() const{
         return frente == nullptr;
     }
-
 
 };

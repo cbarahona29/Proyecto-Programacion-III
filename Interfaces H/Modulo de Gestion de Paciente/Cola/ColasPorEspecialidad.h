@@ -90,7 +90,7 @@ class ColasPorEspecialidad{
     int contarPacientes(const string& especialidadDeseada){
         int pacientesEnFila=0;
 
-         for (const auto& iteracion: mapaColas){
+        for (const auto& iteracion: mapaColas){
             const string& especialidad = iteracion.first; //primera clave del mapa
             const ColaPacientes& colaIteracion = iteracion.second; //segunda clave del mapa
 
@@ -100,10 +100,9 @@ class ColasPorEspecialidad{
                 for (Paciente& paciente : pacientes){
                     pacientesEnFila++;
                 }
-            }
-
-            return pacientesEnFila;
+            }       
         }
+        return pacientesEnFila;
     }
 
     vector <string> obtenerEspecialidades(){

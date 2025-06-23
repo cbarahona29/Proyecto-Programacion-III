@@ -44,8 +44,5 @@ class ExpedienteMedico {
         
         ConsultaMedica buscarConsulta (string fecha) ;
         // ConsultaMedica buscarConsulta (string palabraClave); segun el compilador ambos son lo mismo por los parametros
-
-        string generarReporteClinico ();
-
         
 };

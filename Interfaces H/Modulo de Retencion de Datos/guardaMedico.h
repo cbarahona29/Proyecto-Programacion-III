@@ -16,7 +16,7 @@
 #include <string>
 
 // Archivos 
-#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "../Modulo de Gestion Medico/Medico/Medico.h"
 
 namespace fs = std::filesystem;
 using std::string;
@@ -25,21 +25,21 @@ class guardaMedico {
     private:
 
     public: 
-        guardaMedico () {
-            // Debe chequear si existe el folder paciente
-        }
+        guardaMedico (); // Debe chequear si existe el folder paciente
+
 
         // Funciones de FileSystem (similar a Java file)
         bool checkMainFolder (); // Para chequear si el main Medico folder existe
         void crearMainFolder (); // Para crear el main Paciente folder si no existe
      
         // Funciones Registro de Medico
-        bool registrarPaciente (const Medico& medico); // crea un folder para el paciente
-        Paciente extraerPaciente (string& nombreMedico); // Lee el archivo y regresa el objeto pero enteramente
+        bool existeMedico (int numColgiacion); // chequea si existe ya el medico 
+        bool registrarMedico(const Medico& medico); // crea un folder para el paciente
+        Medico extraerMedico (int numColgiacion); // Lee el archivo y regresa el objeto pero enteramente
         bool registrarInfo (const Medico& medico); // Crea el documento y registra Informacion del Medico
 
-        // Eliminar/Borrar Paciente ***
-        bool borrarInfo (string& nombrePaciente);
-        bool borrarMedico (string& nombreMedico);
+        // Eliminar/Borrar Medico ***
+        bool borrarInfo (int numColgiacion);
+        bool borrarMedico (int numColgiacion);
    
 };

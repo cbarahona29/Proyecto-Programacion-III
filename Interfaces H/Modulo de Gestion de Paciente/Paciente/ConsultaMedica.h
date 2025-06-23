@@ -16,7 +16,7 @@ Clase Consulta Medica
 
 #include <iostream>
 #include <string>
-#include "Modulo de Gestion Medico/Medico/Medico.h"
+#include "../../Modulo de Gestion Medico/Medico/Medico.h"
 
 using std::string;
 
@@ -77,4 +77,8 @@ class ConsultaMedica {
         fechaConsulta = fecha;
     }
 
+    // sobrecarga de operadores para comparaciones
+    bool operator== (const ConsultaMedica& otro) const {
+        return fechaConsulta == otro.getFechaConsulta();
+    }
 };
