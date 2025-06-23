@@ -27,16 +27,16 @@ void guardaPaciente::crearMainFolder() {
     fs::create_directory("../../Folders Guarda Datos/Pacientes");
 }
 
-// Verifica si existe una carpeta con el nombre del paciente
-bool guardaPaciente::existePaciente(string& nombrePaciente) {
-    string path = "../../Folders Guarda Datos/Pacientes/" + nombrePaciente;
+// Verifica si existe una carpeta con el ID del paciente
+bool guardaPaciente::existePaciente(int ID) {
+    string path = "../../Folders Guarda Datos/Pacientes/Paciente" + ID;
     return fs::exists(path) && fs::is_directory(path);
 }
 
 // Crea carpeta para paciente y registra su info
 bool guardaPaciente::registrarPaciente(const Paciente& paciente) {
-    string nombre = paciente.getNombre();
-    if (existePaciente(nombre)) return false; // ya existe
+    int ID = paciente.getID();
+    if (existePaciente(ID)) return false; // ya existe
 
     std::string path = "../../Folders Guarda Datos/Pacientes/Paciente" + std::to_string(paciente.getID());
     return fs::create_directory(path) && registrarInfo(paciente) && crearExpediente(paciente.getID()); 
@@ -44,7 +44,7 @@ bool guardaPaciente::registrarPaciente(const Paciente& paciente) {
 
 // Guarda info del paciente en texto
 bool guardaPaciente::registrarInfo(const Paciente& paciente) {
-    string path = "Pacientes/" + paciente.getNombre() + "/info.txt";
+    string path = "../../Folders Guarda Datos/Pacientes/Paciente" + std::to_string(paciente.getID()) + "/info.txt";
     ofstream archivo(path);
     if (!archivo) return false;
 
@@ -144,14 +144,14 @@ ExpedienteMedico guardaPaciente::leerExpediente(int ID) {
 }
 
 // Eliminar info, expediente y carpeta del paciente
-bool guardaPaciente::borrarInfo(string& nombrePaciente) {
-    return fs::remove("../../Folders Guarda Datos/Pacientes/" + nombrePaciente + "/info.txt");
+bool guardaPaciente::borrarInfo(int ID) {
+    return fs::remove("../../Folders Guarda Datos/Pacientes/Paciente" + std::to_string(ID) + "/info.txt");
 }
 
-bool guardaPaciente::borrarExpediente(string& nombrePaciente) {
-    return fs::remove("../../Folders Guarda Datos/Pacientes/" + nombrePaciente + "/expediente.bin");
+bool guardaPaciente::borrarExpediente(int ID) {
+    return fs::remove("../../Folders Guarda Datos/Pacientes/Paciente" + std::to_string(ID) + "/expediente.bin");
 }
 
-bool guardaPaciente::borrarPaciente(string& nombrePaciente) {
-    return fs::remove_all("../../Folders Guarda Datos/Pacientes/" + nombrePaciente);
+bool guardaPaciente::borrarPaciente(int ID) {
+    return fs::remove_all("../../Folders Guarda Datos/Pacientes/Paciente" + std::to_string(ID));
 }

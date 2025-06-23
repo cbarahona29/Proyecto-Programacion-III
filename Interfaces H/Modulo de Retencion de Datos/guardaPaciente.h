@@ -42,7 +42,7 @@ class guardaPaciente {
         void crearMainFolder (); // Para crear el main Paciente folder si no existe
      
 
-        bool existePaciente (string& nombrePaciente); // para chequear si existe paciente (para registrar paciente)
+        bool existePaciente (int ID); // para chequear si existe paciente (para registrar paciente)
         
         //
         bool registrarPaciente (const Paciente& paciente); // crea un folder para el paciente
@@ -57,7 +57,7 @@ class guardaPaciente {
         
 
         // Eliminar/Borrar Paciente ***
-        bool borrarExpediente (string& nombrePaciente);
-        bool borrarInfo (string& nombrePaciente);
-        bool borrarPaciente (string& nombrePaciente);
+        bool borrarExpediente (int ID);
+        bool borrarInfo (int ID);
+        bool borrarPaciente (int IDs);
 };

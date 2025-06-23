@@ -13,9 +13,12 @@ private:
 
 public:
     // Constructor
-    Medico() : ID(0), numColegiacion(0), numIdentidad(0), numTelefono(0), 
-           nombre(""), especialidad(""), fechaNacimiento(""), eMail(""), disponible(true) {}
+    Medico(int ID, int numColegiacion, int numIdentidad, int numTelefono, string nombre, string especialidad, string fechaNacimiento, string eMail, bool disponible) : 
+        ID(0), numColegiacion(0), numIdentidad(0), numTelefono(0), 
+        nombre(""), especialidad(""), fechaNacimiento(""), eMail(""), disponible(true) {}
 
+    Medico () : ID(0), numColegiacion(0), numIdentidad(0), numTelefono(0), 
+        nombre(""), especialidad(""), fechaNacimiento(""), eMail(""), disponible(true) {}
 
     // Getters
     int getID() const { return ID; }
