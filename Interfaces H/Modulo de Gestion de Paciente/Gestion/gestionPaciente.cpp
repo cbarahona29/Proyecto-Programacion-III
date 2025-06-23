@@ -46,8 +46,8 @@ bool gestionPaciente::eliminarPaciente(const Paciente& paciente) {
     vector<Paciente> vectorPaciente = pacientes.obtenerPacientes();
 
     for (auto& p : vectorPaciente) {
-        if (it->getID() == paciente) {
-            pacientes.erase(it);
+        if (p == paciente) {
+            pacientes.erase(p);
             return true;
         }
     }

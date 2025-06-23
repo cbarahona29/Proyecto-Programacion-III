@@ -1,8 +1,8 @@
 #include <thread>
 #include <map>
 #include <string>
-#include "ColasPorEspecialidad.h"
-#include "Medico.h"
+#include "../Modulo de Gestion de Paciente/Cola/ColasPorEspecialidad.h"
+#include "../Modulo de Gestion Medico/Medico/Medico.h"
 using namespace std;
 
 class Estadisticas{
@@ -24,7 +24,7 @@ class Estadisticas{
         resultado+="-------Medicos disponibles-------\n";
         int medDisponibles=0;
         for(const auto& ind: medicos){
-            if(ind.second->isDisponible()){
+            if(ind.second->estaDisponible()){
                 resultado+=ind.second->getNombre() + "\n";
                 medDisponibles++;
             }
