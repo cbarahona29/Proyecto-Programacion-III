@@ -13,40 +13,40 @@ void gestionPaciente::registrarPaciente(int ID, std::string nombre, std::string 
 
 // Buscar por ID
 Paciente* gestionPaciente::buscarPaciente(int ID) {
-    vector<Paciente> vectorPaciente = pacientes.obtenerPacientes();
+    vector<Paciente*> vectorPaciente = pacientes.obtenerPacientes();
 
     for (auto& p : vectorPaciente) {
-        if (p.getID() == ID) return &p;
+        if (p->getID() == ID) return p;
     }
     return nullptr;
 }
 
 // Buscar por identidad
 Paciente* gestionPaciente::buscarPacientePorIdentidad(int numIdentidad) {
-    vector<Paciente> vectorPaciente = pacientes.obtenerPacientes();
+    vector<Paciente*> vectorPaciente = pacientes.obtenerPacientes();
 
     for (auto& p : vectorPaciente) {
-        if (p.getNumIdentidad() == numIdentidad) return &p;
+        if (p->getNumIdentidad() == numIdentidad) return p;
     }
     return nullptr;
 }
 
 // Buscar por nombre
 Paciente* gestionPaciente::buscarPacientePorNombre(const std::string& nombre) {
-    vector<Paciente> vectorPaciente = pacientes.obtenerPacientes();
+    vector<Paciente*> vectorPaciente = pacientes.obtenerPacientes();
 
     for (auto& p : vectorPaciente) {
-        if (p.getNombre() == nombre) return &p;
+        if (p->getNombre() == nombre) return p;
     }
     return nullptr;
 }
 
 // Eliminar por ID - Al momento no sirve, necesita recorrer la cola y encontrar y borrar directamente el paciente
 bool gestionPaciente::eliminarPaciente(const Paciente& paciente) {
-    vector<Paciente> vectorPaciente = pacientes.obtenerPacientes();
+    vector<Paciente*> vectorPaciente = pacientes.obtenerPacientes();
 
     for (auto& p : vectorPaciente) {
-        if (p == paciente) {
+        if (p->getID() == paciente.getID()) {
             //pacientes.erase(p);
             return true;
         }
@@ -70,21 +70,4 @@ void gestionPaciente::registrarConsulta(const Paciente& paciente, const Consulta
 // Mostrar todos los pacientes
 std::string gestionPaciente::mostrarPacientes() {
     
-}
-
-int main () {
-
-    std::cout << "Valor de __cplusplus: " << __cplusplus << "\n";
-
-#if __cplusplus >= 202002L
-    std::cout << "C++20 o superior\n";
-#elif __cplusplus >= 201703L
-    std::cout << "C++17\n";
-#elif __cplusplus >= 201402L
-    std::cout << "C++14\n";
-#elif __cplusplus >= 201103L
-    std::cout << "C++11\n";
-#else
-    std::cout << "Versión antigua de C++\n";
-#endif
 }

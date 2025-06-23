@@ -11,8 +11,8 @@ class NodoPaciente {
         return nodoSiguiente;
     }
 
-    Paciente getPaciente() const {
-        return paciente;
+    Paciente* getPaciente() {
+        return &paciente;
     }
 
     void setSiguiente(NodoPaciente* nodoPaciente){
