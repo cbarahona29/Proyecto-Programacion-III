@@ -1,245 +1,209 @@
 #include "guardaMedico.h"
-#include <fstream>
-#include <iostream>
 #include <algorithm>
-#include <limits>
+#include <sstream>
 #include <stdexcept>
-namespace fs = std::filesystem;
-using std::string;
-using std::ifstream;
-using std::ofstream;
+#include <QDebug>
 
-guardaMedico::guardaMedico() {
+guardaMedico::guardaMedico()
+{
     try {
-        if (!checkMainFolder()) {
-            crearMainFolder();
+        if (!fs::exists(CARPETA_BASE)) {
+            fs::create_directory(CARPETA_BASE);
         }
     } catch (const std::exception& e) {
-        std::cerr << "Error en constructor guardaMedico: " << e.what() << std::endl;
+        qCritical() << "Error al inicializar guardaMedico:" << e.what();
         throw;
     }
 }
 
-bool guardaMedico::checkMainFolder() {
+bool guardaMedico::validarEstructuraCarpetas()
+{
     try {
-        return fs::exists("Medicos") && fs::is_directory("Medicos");
-    } catch (const std::exception& e) {
-        std::cerr << "Error verificando carpeta principal: " << e.what() << std::endl;
+        return fs::exists(CARPETA_BASE) && fs::is_directory(CARPETA_BASE);
+    } catch (...) {
         return false;
     }
 }
 
-void guardaMedico::crearMainFolder() {
-    try {
-        if (!fs::create_directory("Medicos")) {
-            std::cerr << "Error: No se pudo crear la carpeta Medicos" << std::endl;
-            throw std::runtime_error("No se pudo crear la carpeta Medicos");
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Error creando carpeta principal: " << e.what() << std::endl;
-        throw;
-    }
+std::string guardaMedico::obtenerRutaMedico(int numColegiacion) const
+{
+    return CARPETA_BASE + "/Medico_" + std::to_string(numColegiacion);
 }
 
-bool guardaMedico::existeMedico(int numColegiacion) {
+bool guardaMedico::crearDirectorioMedico(int numColegiacion)
+{
     try {
-        string path = "Medicos/Medico" + std::to_string(numColegiacion);
-        return fs::exists(path) && fs::is_directory(path);
-    } catch (const std::exception& e) {
-        std::cerr << "Error verificando existencia de médico: " << e.what() << std::endl;
+        std::string ruta = obtenerRutaMedico(numColegiacion);
+        return fs::create_directory(ruta);
+    } catch (...) {
         return false;
     }
 }
 
-bool guardaMedico::registrarMedico(const Medico& medico) {
+bool guardaMedico::existeMedico(int numColegiacion)
+{
     try {
-        int numColegiacion = medico.getNumColegiacion();
-
-        // Verificar si ya existe
-        if (existeMedico(numColegiacion)) {
-            std::cout << "El médico ya existe con colegiación: " << numColegiacion << std::endl;
-            return false;
-        }
-
-        // Crear carpeta del médico
-        string path = "Medicos/Medico" + std::to_string(numColegiacion);
-
-        if (!fs::create_directory(path)) {
-            std::cerr << "Error: No se pudo crear la carpeta del médico: " << path << std::endl;
-            return false;
-        }
-
-        // Registrar información
-        bool resultado = registrarInfo(medico);
-        if (!resultado) {
-            // Si falla el registro de info, limpiar la carpeta creada
-            fs::remove_all(path);
-            std::cerr << "Error: Fallo al registrar información, carpeta eliminada" << std::endl;
-        }
-
-        return resultado;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error en registrarMedico: " << e.what() << std::endl;
+        std::string ruta = obtenerRutaMedico(numColegiacion);
+        return fs::exists(ruta) && fs::is_directory(ruta);
+    } catch (...) {
         return false;
     }
 }
 
-bool guardaMedico::registrarInfo(const Medico& medico) {
-    try {
-        string path = "Medicos/Medico" + std::to_string(medico.getNumColegiacion()) + "/info.txt";
-        std::cout << "Escribiendo en: " << path << std::endl;
+bool guardaMedico::registrarMedico(const Medico& medico)
+{
+    if (!validarEstructuraCarpetas()) return false;
+    if (existeMedico(medico.getNumColegiacion())) return false;
 
-        ofstream archivo(path, std::ios::out | std::ios::trunc);
-        if (!archivo.is_open()) {
-            std::cerr << "Error: No se pudo abrir el archivo para escritura: " << path << std::endl;
+    try {
+        std::string ruta = obtenerRutaMedico(medico.getNumColegiacion());
+
+        if (!fs::create_directory(ruta)) {
+            qWarning() << "No se pudo crear directorio para médico";
             return false;
         }
 
-        // Escribir datos con mejor manejo de errores
-        archivo << medico.getID() << '\n';
-        archivo << medico.getNumColegiacion() << '\n';
-        archivo << medico.getNumIdentidad() << '\n';
-        archivo << medico.getNumTelefono() << '\n';
-        archivo << medico.getNombre() << '\n';
-        archivo << medico.getEspecialidad() << '\n';
-        archivo << medico.getFechaNacimiento() << '\n';
-        archivo << medico.getEmail() << '\n';
-        archivo << (medico.estaDisponible() ? "1" : "0") << '\n';
+        return guardarDatosMedico(medico, ruta + "/datos.txt");
+    } catch (const std::exception& e) {
+        qCritical() << "Error al registrar médico:" << e.what();
+        return false;
+    }
+}
 
-        // Verificar si la escritura fue exitosa
+bool guardaMedico::guardarDatosMedico(const Medico& medico, const std::string& ruta)
+{
+    try {
+        std::ofstream archivo(ruta, std::ios::out | std::ios::binary);
+        if (!archivo.is_open()) return false;
+
+        archivo << medico.getID() << "\n";
+        archivo << medico.getNumColegiacion() << "\n";
+        archivo << medico.getNumIdentidad() << "\n";
+        archivo << medico.getNumTelefono() << "\n";
+        archivo << medico.getNombre() << "\n";
+        archivo << medico.getEspecialidad() << "\n";
+        archivo << medico.getFechaNacimiento() << "\n";
+        archivo << medico.getEmail() << "\n";
+        archivo << (medico.estaDisponible() ? "1" : "0") << "\n";
+
         if (archivo.fail()) {
-            std::cerr << "Error durante la escritura del archivo" << std::endl;
             archivo.close();
             return false;
         }
 
-        archivo.flush(); // Forzar escritura al disco
         archivo.close();
-
-        // Verificar que el archivo se cerró correctamente
-        if (archivo.is_open()) {
-            std::cerr << "Advertencia: El archivo no se cerró correctamente" << std::endl;
-        }
-
-        std::cout << "Archivo guardado exitosamente: " << path << std::endl;
         return true;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error en registrarInfo: " << e.what() << std::endl;
+    } catch (...) {
         return false;
     }
 }
 
-Medico guardaMedico::extraerMedico(int numColegiacion) {
+Medico guardaMedico::cargarDatosMedico(const std::string& ruta)
+{
     try {
-        string path = "Medicos/Medico" + std::to_string(numColegiacion) + "/info.txt";
+        std::ifstream archivo(ruta);
+        if (!archivo.is_open()) return Medico();
 
-        ifstream archivo(path);
-        if (!archivo.is_open()) {
-            std::cerr << "Error: No se pudo abrir el archivo: " << path << std::endl;
-            return Medico(); // Constructor por defecto
-        }
+        int id, colegiacion, identidad, telefono;
+        std::string nombre, especialidad, nacimiento, email, disponibleStr;
 
-        int ID, colegiacion, identidad, telefono;
-        string nombre, especialidad, nacimiento, email;
-        string disponibleStr;
-
-        // Leer datos con validación
-        if (!(archivo >> ID >> colegiacion >> identidad >> telefono)) {
-            std::cerr << "Error leyendo datos numéricos del archivo" << std::endl;
-            archivo.close();
-            return Medico();
-        }
-
-        archivo.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-        if (!std::getline(archivo, nombre) ||
-            !std::getline(archivo, especialidad) ||
-            !std::getline(archivo, nacimiento) ||
-            !std::getline(archivo, email) ||
-            !std::getline(archivo, disponibleStr)) {
-            std::cerr << "Error leyendo strings del archivo" << std::endl;
-            archivo.close();
-            return Medico();
-        }
+        archivo >> id >> colegiacion >> identidad >> telefono;
+        archivo.ignore();
+        std::getline(archivo, nombre);
+        std::getline(archivo, especialidad);
+        std::getline(archivo, nacimiento);
+        std::getline(archivo, email);
+        std::getline(archivo, disponibleStr);
 
         bool disponible = (disponibleStr == "1");
-        archivo.close();
 
-        return Medico(ID, colegiacion, identidad, telefono, nombre,
+        return Medico(id, colegiacion, identidad, telefono, nombre,
                       especialidad, nacimiento, email, disponible);
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error en extraerMedico: " << e.what() << std::endl;
+    } catch (...) {
         return Medico();
     }
 }
 
-int guardaMedico::obtenerProximoID() {
+Medico guardaMedico::buscarPorColegiacion(int numColegiacion)
+{
+    if (!existeMedico(numColegiacion)) return Medico();
+
     try {
-        int maxID = 0;
+        std::string ruta = obtenerRutaMedico(numColegiacion) + "/datos.txt";
+        return cargarDatosMedico(ruta);
+    } catch (...) {
+        return Medico();
+    }
+}
 
-        if (!fs::exists("Medicos") || !fs::is_directory("Medicos")) {
-            std::cout << "Carpeta Medicos no existe, retornando ID 1" << std::endl;
-            return 1;
-        }
+std::vector<Medico> guardaMedico::listarTodos()
+{
+    std::vector<Medico> medicos;
 
-        for (const auto& entry : fs::directory_iterator("Medicos")) {
-            try {
-                if (!entry.is_directory()) continue;
+    if (!validarEstructuraCarpetas()) return medicos;
 
-                string infoPath = entry.path().string() + "/info.txt";
-                ifstream archivo(infoPath);
-
-                if (!archivo.is_open()) {
-                    std::cout << "No se pudo abrir: " << infoPath << std::endl;
-                    continue;
+    try {
+        for (const auto& entry : fs::directory_iterator(CARPETA_BASE)) {
+            if (entry.is_directory()) {
+                std::string ruta = entry.path().string() + "/datos.txt";
+                Medico m = cargarDatosMedico(ruta);
+                if (m.getID() > 0) { // Validar que se cargó correctamente
+                    medicos.push_back(m);
                 }
-
-                int currentID = 0;
-                if (archivo >> currentID) {
-                    if (currentID > maxID) {
-                        maxID = currentID;
-                    }
-                } else {
-                    std::cout << "Error leyendo ID de: " << infoPath << std::endl;
-                }
-
-                archivo.close();
-
-            } catch (const std::exception& e) {
-                std::cerr << "Error procesando entrada: " << e.what() << std::endl;
-                continue;
             }
         }
-
-        int proximoID = maxID + 1;
-        std::cout << "Próximo ID calculado: " << proximoID << std::endl;
-        return proximoID;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error en obtenerProximoID: " << e.what() << std::endl;
-        return 1; // ID por defecto
+    } catch (...) {
+        // Silenciar errores de lectura
     }
+
+    return medicos;
 }
 
-bool guardaMedico::borrarInfo(int numColegiacion) {
+bool guardaMedico::actualizarMedico(const Medico& medico)
+{
+    if (!existeMedico(medico.getNumColegiacion())) return false;
+
     try {
-        string path = "Medicos/Medico" + std::to_string(numColegiacion) + "/info.txt";
-        return fs::remove(path);
-    } catch (const std::exception& e) {
-        std::cerr << "Error en borrarInfo: " << e.what() << std::endl;
+        std::string ruta = obtenerRutaMedico(medico.getNumColegiacion()) + "/datos.txt";
+        return guardarDatosMedico(medico, ruta);
+    } catch (...) {
         return false;
     }
 }
 
-bool guardaMedico::borrarMedico(int numColegiacion) {
+bool guardaMedico::eliminarMedico(int numColegiacion)
+{
+    if (!existeMedico(numColegiacion)) return false;
+
     try {
-        string path = "Medicos/Medico" + std::to_string(numColegiacion);
-        return fs::remove_all(path) > 0;
-    } catch (const std::exception& e) {
-        std::cerr << "Error en borrarMedico: " << e.what() << std::endl;
+        std::string ruta = obtenerRutaMedico(numColegiacion);
+        return fs::remove_all(ruta) > 0;
+    } catch (...) {
         return false;
     }
+}
+
+int guardaMedico::obtenerProximoID()
+{
+    int maxID = 0;
+
+    if (!validarEstructuraCarpetas()) return 1;
+
+    try {
+        for (const auto& entry : fs::directory_iterator(CARPETA_BASE)) {
+            if (entry.is_directory()) {
+                std::string ruta = entry.path().string() + "/datos.txt";
+                std::ifstream archivo(ruta);
+                if (archivo.is_open()) {
+                    int id;
+                    archivo >> id;
+                    if (id > maxID) maxID = id;
+                }
+            }
+        }
+    } catch (...) {
+        // Silenciar errores de lectura
+    }
+
+    return maxID + 1;
 }

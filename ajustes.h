@@ -2,28 +2,24 @@
 #define AJUSTES_H
 
 #include <QMainWindow>
-#include <QPushButton>
 #include <QLabel>
+#include <QPushButton>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
 #include <QMessageBox>
-#include <QWidget>
-#include <QLineEdit>
 
-class MenuAdmin; // Forward declaration
+class MenuAdmin;
 
-class Ajustes : public QMainWindow {
+class Ajustes : public QMainWindow
+{
     Q_OBJECT
 
 public:
     explicit Ajustes(MenuAdmin* menuAdmin, QWidget *parent = nullptr);
 
 private slots:
-    void crearCuentaDoctor();
-    void crearCuentaRecepcionista();
-    void eliminarCuentas();
-    void cambiarContrasenaRecepcion();
+    void abrirCrearCuentas();
+    void abrirCambiarContrasena();
+    void abrirEliminarCuentas();
     void regresarAlMenu();
 
 private:
@@ -32,15 +28,13 @@ private:
     QPushButton* crearBoton(const QString& texto);
     QMessageBox* crearMensaje(const QString& titulo, const QString& texto, QMessageBox::Icon icono);
 
-    // Widgets
+    // Elementos de la interfaz
     QLabel* labelTitulo;
-    QPushButton* btnCrearCuentaDoctor;
-    QPushButton* btnCrearCuentaRecepcionista;
-    QPushButton* btnEliminarCuentas;
+    QPushButton* btnCrearCuentas;
     QPushButton* btnCambiarContrasena;
+    QPushButton* btnEliminarCuentas;
     QPushButton* btnRegresar;
 
-    // Referencias
     MenuAdmin* menuAdminWindow;
 };
 

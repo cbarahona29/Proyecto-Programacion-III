@@ -21,6 +21,7 @@ private slots:
     void registrarMedico();
     void regresar();
 
+
 private:
     void configurarUI();
     void configurarEventos();
