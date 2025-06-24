@@ -1,5 +1,8 @@
-#include "..\.h"
+#pragma once
+
 #include <vector>
+#include "NodoMedico.h"
+
 using namespace std;
 
 class ColaMedico{
@@ -24,8 +27,8 @@ class ColaMedico{
         }
     }
 
-    vector<Medico> obtenerMedicos() const{
-        vector<Medico> medicos;
+    vector<Medico*> obtenerMedicos() {
+        vector<Medico*> medicos;
         NodoMedico* nodoActual = frente;
 
         while(nodoActual!=nullptr){
@@ -42,7 +45,7 @@ class ColaMedico{
         }
 
         NodoMedico* nodoAEliminar = frente; //pq es first in first out
-        Medico* medico = new Medico(nodoAEliminar->getMedico()); //copiamos el paciente 
+        Medico* medico = nodoAEliminar->getMedico(); //copiamos el paciente 
         frente = frente->getSiguiente(); 
 
         if(frente == nullptr){

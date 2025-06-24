@@ -1,4 +1,4 @@
-#include "../../Modulo de Gestion Medico/Medico/Medico.h"
+#include "../Medico/Medico.h"
 
 class NodoMedico {
     public:
@@ -11,8 +11,8 @@ class NodoMedico {
         return nodoSiguiente;
     }
 
-    Medico getMedico() const {
-        return medico;
+    Medico* getMedico() {
+        return &medico;
     }
 
     void setSiguiente(NodoMedico* nodoMedico){

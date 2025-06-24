@@ -68,7 +68,7 @@ Medico guardaMedico::extraerMedico (int numColegiacion){
     return Medico(ID, numColegiacion, identidad, telefono, nombre, especialidad, nacimiento, email, disponible);
 }
 
-// Guarda info del Medico en texto
+// Guarda info del Medico en texto PUEDE USARSE PARA EDITAR INFORMACION
 bool guardaMedico::registrarInfo(const Medico& medico) {
     string path = "../../Folders Guarda Datos/Medicos/Medico" + std::to_string(medico.getNumColegiacion()) + "/info.txt";
     ofstream archivo(path);
