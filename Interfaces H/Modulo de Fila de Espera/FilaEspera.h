@@ -35,8 +35,7 @@ class FilaEspera {
 
         //  Inscribir & Atender
         void inscribirPaciente (Paciente paciente, string especialidad);
-        void asignarPaciente (const string& especialidad, const Medico& medico,
-        string motivo, string diagnostico, string tratamiento, string notas, string fecha );
+        void asignarPaciente (Paciente paciente );
         bool removerPacienteDeFila (Paciente paciente, string especialidad);
 
 };
