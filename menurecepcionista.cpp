@@ -12,6 +12,8 @@
 #include <QListWidget>
 #include <QSplitter>
 #include <QGroupBox>
+#include "BuscarMedic.h"
+
 
 MenuRecepcionista::MenuRecepcionista(Login* login) : loginWindow(login) {
     configurarUI();
@@ -147,8 +149,16 @@ void MenuRecepcionista::abrirVentanaAgendarCita() {
 }
 
 void MenuRecepcionista::abrirVentanaBusquedaMedico() {
-    // Emitir señal para que otra clase maneje la lógica
-    emit buscarMedicoSolicitado();
+    if (!ventanaBuscarMedico) {
+        ventanaBuscarMedico = new BuscarMedic(this);
+        connect(ventanaBuscarMedico, &QWidget::destroyed, [this]() {
+            ventanaBuscarMedico = nullptr;
+        });
+    }
+
+    ventanaBuscarMedico->show();
+    ventanaBuscarMedico->raise();
+    ventanaBuscarMedico->activateWindow();
 }
 
 void MenuRecepcionista::abrirVentanaFilaEspera() {

@@ -8,23 +8,21 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QTextEdit>
-#include <QWidget>
-#include <QPainter>
-#include <QPixmap>
-#include <map>
-#include <string>
+#include <QMap>
+#include <QString>
+#include <utility>
 
 class MenuDr;
 class MenuAdmin;
 class MenuRecepcionista;
 
-class Login : public QMainWindow
-{
+class Login : public QMainWindow {
     Q_OBJECT
 
 public:
     Login();
     void cerrarSesion();
+    QString getUsuarioActual() const { return usuarioActual; }
 
 private:
     void configurarUI();
@@ -33,22 +31,24 @@ private:
     void hacerLogin();
     void mostrarMensaje(QString mensaje, bool exito);
     void abrirDashboard();
+    void cargarCredencialesDesdeArchivos();  // ✅ NUEVA FUNCIÓN
 
-    // Widgets
+    // UI
     QLineEdit* campoID;
     QLineEdit* campoPassword;
     QPushButton* botonLogin;
     QTextEdit* areaTexto;
 
-    // Datos
-    std::map<std::string, std::pair<std::string, std::string>> usuarios; // {usuario: {contraseña, tipo}}
+    // Gestión de usuario
+    QMap<QString, QPair<QString, QString>> usuarios; // ID -> (Password, Tipo)
     QString usuarioActual;
     QString tipoUsuarioActual;
 
-    // Referencias a los menús
+    // Menús
     MenuDr* menuDr;
     MenuAdmin* menuAdmin;
     MenuRecepcionista* menuRecepcionista;
 };
 
 #endif // LOGIN_H
+

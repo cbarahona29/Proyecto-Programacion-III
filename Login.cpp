@@ -2,8 +2,10 @@
 #include "MenuDr.h"
 #include "MenuAdmin.h"
 #include "MenuRecepcionista.h"
-#include <QTime>
 #include <QTimer>
+#include <QDir>
+#include <QFile>
+#include <QTextStream>
 
 Login::Login() {
     configurarUI();
@@ -24,7 +26,6 @@ void Login::configurarUI() {
     QVBoxLayout* layout = new QVBoxLayout(widget);
     layout->setAlignment(Qt::AlignCenter);
 
-
     QLabel* labelID = new QLabel("ID");
     labelID->setStyleSheet("font-weight: bold; color: black;");
     layout->addWidget(labelID);
@@ -44,7 +45,7 @@ void Login::configurarUI() {
     campoPassword->setStyleSheet("border: 1px solid #999; padding: 5px; background-color: white; color: black;");
     layout->addWidget(campoPassword);
 
-    botonLogin = new QPushButton("Iniciar Sesion");
+    botonLogin = new QPushButton("Iniciar Sesión");
     botonLogin->setFixedSize(120, 35);
     botonLogin->setStyleSheet(
         "QPushButton { background-color: #e0e0e0; border: 1px solid #999; border-radius: 3px; padding: 5px; color: black; }"
@@ -67,101 +68,118 @@ void Login::configurarUI() {
 }
 
 void Login::configurarUsuarios() {
+    // Usuarios fijos
     usuarios["admin"] = {"123456", "administrador"};
-    usuarios["doctor"] = {"medico123", "doctor"};
     usuarios["recepcionista"] = {"recepcionista123", "recepcionista"};
-    usuarios["test"] = {"test", "doctor"};
+
+    // ✅ Cargar médicos desde archivos
+    cargarCredencialesDesdeArchivos();
+}
+
+void Login::cargarCredencialesDesdeArchivos() {
+    QDir directorio("Credenciales");
+    if (!directorio.exists()) return;
+
+    QStringList archivos = directorio.entryList(QStringList() << "Medico*.txt", QDir::Files);
+    for (const QString& archivoNombre : archivos) {
+        QFile archivo(directorio.filePath(archivoNombre));
+        if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text)) continue;
+
+        QTextStream stream(&archivo);
+        QString usuario, password, tipo;
+
+        while (!stream.atEnd()) {
+            QString linea = stream.readLine();
+            if (linea.startsWith("Usuario: "))
+                usuario = linea.mid(9).trimmed();
+            else if (linea.startsWith("Password: "))
+                password = linea.mid(10).trimmed();
+            else if (linea.startsWith("Tipo: "))
+                tipo = linea.mid(6).trimmed().toLower();
+        }
+
+        if (!usuario.isEmpty() && !password.isEmpty() && !tipo.isEmpty()) {
+            usuarios[usuario] = {password, tipo};
+        }
+
+        archivo.close();
+    }
 }
 
 void Login::conectarEventos() {
-    QObject::connect(botonLogin, &QPushButton::clicked, [this]() { hacerLogin(); });
-    QObject::connect(campoPassword, &QLineEdit::returnPressed, [this]() { hacerLogin(); });
-    QObject::connect(campoID, &QLineEdit::returnPressed, [this]() { hacerLogin(); });
+    connect(botonLogin, &QPushButton::clicked, this, &Login::hacerLogin);
+    connect(campoPassword, &QLineEdit::returnPressed, this, &Login::hacerLogin);
+    connect(campoID, &QLineEdit::returnPressed, this, &Login::hacerLogin);
 }
 
 void Login::hacerLogin() {
-    std::string id = campoID->text().toStdString();
-    std::string pass = campoPassword->text().toStdString();
+    QString id = campoID->text().trimmed();
+    QString pass = campoPassword->text().trimmed();
 
-    if (id.empty() || pass.empty()) {
-        mostrarMensaje(" ERROR: Complete todos los campos", false);
+    if (id.isEmpty() || pass.isEmpty()) {
+        mostrarMensaje("ERROR: Complete todos los campos", false);
         return;
     }
 
-    if (usuarios.find(id) != usuarios.end() && usuarios[id].first == pass) {
-        std::string tipoUsuario = usuarios[id].second;
-        mostrarMensaje("LOGIN EXITOSO: Bienvenido " + QString::fromStdString(id) + "!", true);
-        usuarioActual = QString::fromStdString(id);
-        tipoUsuarioActual = QString::fromStdString(tipoUsuario);
+    if (usuarios.contains(id) && usuarios[id].first == pass) {
+        tipoUsuarioActual = usuarios[id].second;
+        usuarioActual = id;
+        mostrarMensaje("LOGIN EXITOSO: Bienvenido " + id + "!", true);
 
-        // Crear y mostrar dashboard después de 1 segundo
-        QTimer::singleShot(1000, [this]() {
-            abrirDashboard();
-        });
+        QTimer::singleShot(1000, this, &Login::abrirDashboard);
     } else {
-        mostrarMensaje(" LOGIN FALLIDO: Credenciales incorrectas", false);
+        mostrarMensaje("LOGIN FALLIDO: Credenciales incorrectas", false);
         campoPassword->clear();
     }
 }
 
 void Login::mostrarMensaje(QString mensaje, bool exito) {
-    QString textoCompleto = mensaje;
-
+    areaTexto->setPlainText(mensaje);
     if (exito) {
         areaTexto->setStyleSheet("background-color: #e8f5e8; border: 1px solid #4CAF50; padding: 8px; color: #2E7D32;");
     } else {
         areaTexto->setStyleSheet("background-color: #ffeaea; border: 1px solid #f44336; padding: 8px; color: #c62828;");
     }
-
-    areaTexto->setPlainText(textoCompleto);
 }
 
 void Login::abrirDashboard() {
-    hide();  // Ocultar ventana de login
-
+    hide();
     if (tipoUsuarioActual == "doctor") {
-        if (!menuDr) {
-            menuDr = new MenuDr(this);
-        }
+        if (!menuDr) menuDr = new MenuDr(this);
         menuDr->setUsuario(usuarioActual);
         menuDr->show();
-    }
-    else if (tipoUsuarioActual == "administrador") {
-        if (!menuAdmin) {
-            menuAdmin = new MenuAdmin(this);
-        }
+    } else if (tipoUsuarioActual == "administrador") {
+        if (!menuAdmin) menuAdmin = new MenuAdmin(this);
         menuAdmin->setUsuario(usuarioActual);
         menuAdmin->show();
-    }
-    else if (tipoUsuarioActual == "recepcionista") {
-        if (!menuRecepcionista) {
-            menuRecepcionista = new MenuRecepcionista(this);
-        }
+    } else if (tipoUsuarioActual == "recepcionista") {
+        if (!menuRecepcionista) menuRecepcionista = new MenuRecepcionista(this);
         menuRecepcionista->setUsuario(usuarioActual);
         menuRecepcionista->show();
     }
 }
 
 void Login::cerrarSesion() {
-    // Limpiar todos los menús
     if (menuDr) {
         menuDr->hide();
+        delete menuDr;
         menuDr = nullptr;
     }
     if (menuAdmin) {
         menuAdmin->hide();
+        delete menuAdmin;
         menuAdmin = nullptr;
     }
     if (menuRecepcionista) {
         menuRecepcionista->hide();
+        delete menuRecepcionista;
         menuRecepcionista = nullptr;
     }
 
-    usuarioActual = "";
-    tipoUsuarioActual = "";
     campoID->clear();
     campoPassword->clear();
-    campoID->setFocus();
+    usuarioActual.clear();
+    tipoUsuarioActual.clear();
     areaTexto->setPlainText("Sistema listo...");
     areaTexto->setStyleSheet("background-color: #f8f8f8; border: 1px solid #ccc; padding: 8px; color: black;");
     show();

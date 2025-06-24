@@ -10,10 +10,13 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QMessageBox>
-
-// Incluir nuestras clases de datos
-#include "guardaMedico.h"
-#include "Medico.h"
+#include <QString>
+#include <QDir>
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
+#include "guardamedico.h"
+#include "medico.h"
 
 class RegistroMed : public QWidget
 {
@@ -26,19 +29,16 @@ private slots:
     void registrarMedico();
     void regresar();
 
-signals:
-    void regresarAlMenu();
-
 private:
-    // Métodos privados para UI
+    // Métodos privados
     void configurarUI();
     void configurarEventos();
     void configurarIDAutomatico();
-
-    // Método para limpiar campos
     void limpiarCampos();
+    bool validarPassword(const QString& password, const QString& confirmPassword);
+    bool guardarCredenciales(int numColegiacion, const QString& password);
 
-    // Controles de la interfaz
+    // Widgets
     QLineEdit* txtId;
     QLineEdit* txtColegiacion;
     QLineEdit* txtIdentidad;
@@ -47,11 +47,17 @@ private:
     QComboBox* cmbEspecialidad;
     QLineEdit* txtFechaNacimiento;
     QLineEdit* txtEmail;
+    QLineEdit* txtPassword;           // Nuevo campo
+    QLineEdit* txtConfirmPassword;    // Nuevo campo
+
     QPushButton* btnRegistrar;
     QPushButton* btnRegresar;
 
-    // Instancia de guardaMedico para manejar persistencia
+    // Gestor de médicos
     guardaMedico* gestorMedicos;
+
+signals:
+    void regresarAlMenu();
 };
 
 #endif // REGISTROMED_H

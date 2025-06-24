@@ -48,21 +48,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ColaPacientes.h
         NodoPaciente.h
         ColasPorEspecialidad.h
-        guardacuentas.h guardacuentas.cpp
-        gestionpaciente.h gestionpaciente.cpp
-        buscarpacientes.h buscarpacientes.cpp
-
-        ColaMedico.h
-        ColasPorEspecialidadMedico.h
-        NodoMedico.h
-        gestionmedica.h gestionmedica.cpp
-
-        gestionmedica.h gestionmedica.cpp
-        buscarmedic.h buscarmedic.cpp
-        filadeespera.h filadeespera.cpp
-
-        atenderpaciente.h atenderpaciente.cpp
-        expedientesclinicos.h expedientesclinicos.cpp
 
 
     )

@@ -18,6 +18,8 @@
 #include <QDebug>
 #include <QInputDialog>
 #include <QLineEdit>
+#include "BuscarMedic.h"
+
 
 // Forward declarations
 class Login;
@@ -50,6 +52,8 @@ private:
     void configurarUI();
     void configurarEventos();
     QPushButton* crearBoton(QString texto);
+    BuscarMedic* ventanaBuscarMedico = nullptr;
+
 
     // Widgets principales
     QLabel* labelBienvenida;

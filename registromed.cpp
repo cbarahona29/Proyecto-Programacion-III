@@ -13,7 +13,7 @@ RegistroMed::RegistroMed(QWidget *parent) : QWidget(parent) {
 
 void RegistroMed::configurarUI() {
     setWindowTitle("Registro de Medicos");
-    setFixedSize(800, 600);
+    setFixedSize(800, 650); // Aumentar altura para el nuevo campo
     setStyleSheet(
         "QWidget {"
         "   background-color: #f0f0f0;"
@@ -115,6 +115,19 @@ void RegistroMed::configurarUI() {
     txtEmail->setPlaceholderText("medico@ejemplo.com");
     gridCampos->addWidget(txtEmail, 3, 3);
 
+    // Fila 5 - Campos de contraseña
+    gridCampos->addWidget(new QLabel("Contraseña:"), 4, 0);
+    txtPassword = new QLineEdit();
+    txtPassword->setEchoMode(QLineEdit::Password);
+    txtPassword->setPlaceholderText("Ingrese su contraseña");
+    gridCampos->addWidget(txtPassword, 4, 1);
+
+    gridCampos->addWidget(new QLabel("Confirmar Contraseña:"), 4, 2);
+    txtConfirmPassword = new QLineEdit();
+    txtConfirmPassword->setEchoMode(QLineEdit::Password);
+    txtConfirmPassword->setPlaceholderText("Confirme su contraseña");
+    gridCampos->addWidget(txtConfirmPassword, 4, 3);
+
     layoutPrincipal->addLayout(gridCampos);
     layoutPrincipal->addStretch();
 
@@ -148,6 +161,28 @@ void RegistroMed::configurarIDAutomatico() {
                          "QLineEdit:read-only { background-color: #f0f0f0; color: #666; }");
 }
 
+bool RegistroMed::validarPassword(const QString& password, const QString& confirmPassword) {
+    // Verificar que las contraseñas coinciden
+    if (password != confirmPassword) {
+        QMessageBox::warning(this, "Error", "Las contraseñas no coinciden.");
+        return false;
+    }
+
+    // Verificar longitud mínima
+    if (password.length() < 6) {
+        QMessageBox::warning(this, "Error", "La contraseña debe tener al menos 6 caracteres.");
+        return false;
+    }
+
+    // Verificar que no esté vacía
+    if (password.trimmed().isEmpty()) {
+        QMessageBox::warning(this, "Error", "La contraseña no puede estar vacía.");
+        return false;
+    }
+
+    return true;
+}
+
 void RegistroMed::registrarMedico() {
     try {
         // Obtener datos de los campos - ID ya está configurado automáticamente
@@ -159,10 +194,27 @@ void RegistroMed::registrarMedico() {
         QString especialidad = cmbEspecialidad->currentText();
         QString fechaNacimiento = txtFechaNacimiento->text();
         QString email = txtEmail->text().trimmed();
+        QString password = txtPassword->text();
+        QString confirmPassword = txtConfirmPassword->text();
 
-        // Si no hay número de colegiación, no se puede registrar
+        // Validaciones básicas
         if (numColegiacion == 0) {
             QMessageBox::warning(this, "Error", "El número de colegiación es necesario para crear el archivo.");
+            return;
+        }
+
+        if (nombre.isEmpty()) {
+            QMessageBox::warning(this, "Error", "El nombre es obligatorio.");
+            return;
+        }
+
+        if (especialidad == "Seleccionar especialidad...") {
+            QMessageBox::warning(this, "Error", "Debe seleccionar una especialidad.");
+            return;
+        }
+
+        // Validar contraseña
+        if (!validarPassword(password, confirmPassword)) {
             return;
         }
 
@@ -182,13 +234,23 @@ void RegistroMed::registrarMedico() {
         bool resultado = gestorMedicos->registrarMedico(nuevoMedico);
 
         if (resultado) {
-            QMessageBox::information(this, "Éxito",
-                                     QString("Médico registrado exitosamente.\n\n") +
-                                         "ID: " + QString::number(id) + "\n" +
-                                         "Nombre: " + nombre + "\n" +
-                                         "Especialidad: " + especialidad + "\n" +
-                                         "Número de Colegiación: " + QString::number(numColegiacion) + "\n" +
-                                         "Archivo creado en: Medicos/Medico" + QString::number(numColegiacion));
+            // Aquí puedes agregar la lógica para guardar la contraseña
+            // Por ejemplo, crear un archivo de credenciales o usar un sistema de autenticación
+            bool credencialesGuardadas = guardarCredenciales(numColegiacion, password);
+
+            if (credencialesGuardadas) {
+                QMessageBox::information(this, "Éxito",
+                                         QString("Médico y cuenta registrados exitosamente.\n\n") +
+                                             "ID: " + QString::number(id) + "\n" +
+                                             "Nombre: " + nombre + "\n" +
+                                             "Especialidad: " + especialidad + "\n" +
+                                             "Número de Colegiación: " + QString::number(numColegiacion) + "\n" +
+                                             "Archivo creado en: Medicos/Medico" + QString::number(numColegiacion) + "\n" +
+                                             "Cuenta de usuario creada exitosamente.");
+            } else {
+                QMessageBox::warning(this, "Advertencia",
+                                     "Médico registrado exitosamente, pero hubo un problema al crear la cuenta de usuario.");
+            }
 
             // Limpiar los campos después del registro exitoso
             limpiarCampos();
@@ -206,6 +268,35 @@ void RegistroMed::registrarMedico() {
     }
 }
 
+bool RegistroMed::guardarCredenciales(int numColegiacion, const QString& password) {
+    try {
+        // Crear directorio de credenciales si no existe
+        QDir dir;
+        if (!dir.exists("Credenciales")) {
+            dir.mkpath("Credenciales");
+        }
+
+        // Crear archivo de credenciales para el médico
+        QString nombreArchivo = QString("Credenciales/Medico%1.txt").arg(numColegiacion);
+        QFile archivo(nombreArchivo);
+
+        if (archivo.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream stream(&archivo);
+            stream << "Usuario: " << numColegiacion << "\n";
+            stream << "Password: " << password << "\n"; // En producción, esto debería estar encriptado
+            stream << "Tipo: Medico\n";
+            stream << "Estado: Activo\n";
+            stream << "FechaCreacion: " << QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss") << "\n";
+
+            archivo.close();
+            return true;
+        }
+        return false;
+    } catch (...) {
+        return false;
+    }
+}
+
 void RegistroMed::limpiarCampos() {
     // No limpiar el ID ya que se maneja automáticamente
     txtColegiacion->clear();
@@ -215,6 +306,8 @@ void RegistroMed::limpiarCampos() {
     cmbEspecialidad->setCurrentIndex(0);
     txtFechaNacimiento->clear();
     txtEmail->clear();
+    txtPassword->clear();
+    txtConfirmPassword->clear();
 
     // Poner el foco en el primer campo editable (número de colegiación)
     txtColegiacion->setFocus();

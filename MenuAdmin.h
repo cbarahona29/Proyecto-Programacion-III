@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 
+
 class Login;
 class RegistroPaciente;
 class RegistroMed;
@@ -12,7 +13,7 @@ class Ajustes;
 class FilaEspera;
 class guardaCuentas;
 class BuscarPacientes;
-class BuscarMedicos;  // Añadir declaración forward
+class BuscarMedic;
 
 class MenuAdmin : public QMainWindow
 {
@@ -46,7 +47,7 @@ private:
     Ajustes* ventanaAjustes = nullptr;
     FilaEspera* ventanaFilaEspera = nullptr;
     BuscarPacientes* ventanaBuscarPacientes = nullptr;
-    BuscarMedicos* ventanaBuscarMedicos = nullptr;  // Añadir puntero a ventana de búsqueda de médicos
+    BuscarMedic* ventanaBuscarMedicos = nullptr;
 
     // Controles UI
     QLabel* labelBienvenida;

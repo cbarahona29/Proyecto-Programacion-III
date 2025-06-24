@@ -6,7 +6,7 @@
 #include "FilaEspera.h"
 #include "guardaCuentas.h"
 #include "BuscarPacientes.h"
-#include "BuscarMedicos.h"  // Añadir el include para BuscarMedicos
+#include "BuscarMedic.h"  // Añadir el include para BuscarMedicos
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -184,9 +184,12 @@ void MenuAdmin::registrarMedico() {
 }
 
 void MenuAdmin::buscarMedicos() {
-    // Crear la ventana de búsqueda de médicos si no existe
-
-
+    if (!ventanaBuscarMedicos) {
+        ventanaBuscarMedicos = new BuscarMedic(this);
+    }
+    ventanaBuscarMedicos->show();
+    ventanaBuscarMedicos->raise();
+    ventanaBuscarMedicos->activateWindow();
 }
 
 void MenuAdmin::mostrarFilaEspera() {
