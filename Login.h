@@ -2,53 +2,55 @@
 #define LOGIN_H
 
 #include <QMainWindow>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QLabel>
-#include <QTextEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QMap>
-#include <QString>
-#include <utility>
+#include <QTextEdit> // Added for QTextEdit
 
+// Forward declarations to avoid circular includes and speed up compilation
 class MenuDr;
 class MenuAdmin;
 class MenuRecepcionista;
 
-class Login : public QMainWindow {
+class Login : public QMainWindow
+{
     Q_OBJECT
 
 public:
     Login();
-    void cerrarSesion();
-    QString getUsuarioActual() const { return usuarioActual; }
+
+    // Destructor to clean up dynamically allocated menus
+    ~Login();
+
+    void cerrarSesion(); // Slot to return to login
+
+private slots:
+    void hacerLogin();
 
 private:
     void configurarUI();
     void configurarUsuarios();
     void conectarEventos();
-    void hacerLogin();
+    void cargarCredencialesDesdeArchivos(); // New function for loading doctor credentials
     void mostrarMensaje(QString mensaje, bool exito);
     void abrirDashboard();
-    void cargarCredencialesDesdeArchivos();  // ✅ NUEVA FUNCIÓN
 
-    // UI
     QLineEdit* campoID;
     QLineEdit* campoPassword;
     QPushButton* botonLogin;
-    QTextEdit* areaTexto;
+    QTextEdit* areaTexto; // Added QTextEdit
 
-    // Gestión de usuario
-    QMap<QString, QPair<QString, QString>> usuarios; // ID -> (Password, Tipo)
+    // Stores username -> {password, role}
+    QMap<QString, QPair<QString, QString>> usuarios;
     QString usuarioActual;
     QString tipoUsuarioActual;
 
-    // Menús
     MenuDr* menuDr;
     MenuAdmin* menuAdmin;
     MenuRecepcionista* menuRecepcionista;
 };
 
 #endif // LOGIN_H
-

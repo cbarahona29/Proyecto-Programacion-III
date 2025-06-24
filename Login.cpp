@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QTextStream>
+#include <QMessageBox> // Added for QMessageBox
 
 Login::Login() {
     configurarUI();
@@ -14,6 +15,19 @@ Login::Login() {
     menuDr = nullptr;
     menuAdmin = nullptr;
     menuRecepcionista = nullptr;
+}
+
+Login::~Login() {
+    // Ensure all dynamically allocated menus are deleted when Login is destroyed
+    if (menuDr) {
+        delete menuDr;
+    }
+    if (menuAdmin) {
+        delete menuAdmin;
+    }
+    if (menuRecepcionista) {
+        delete menuRecepcionista;
+    }
 }
 
 void Login::configurarUI() {
@@ -71,8 +85,9 @@ void Login::configurarUsuarios() {
     // Usuarios fijos
     usuarios["admin"] = {"123456", "administrador"};
     usuarios["recepcionista"] = {"recepcionista123", "recepcionista"};
+    usuarios["doctor"] = {"medico123", "doctor"}; // Corrected password as per our discussion
 
-    // ✅ Cargar médicos desde archivos
+    // Cargar médicos desde archivos
     cargarCredencialesDesdeArchivos();
 }
 
@@ -160,6 +175,7 @@ void Login::abrirDashboard() {
 }
 
 void Login::cerrarSesion() {
+    // If the menus are visible, hide them before deleting
     if (menuDr) {
         menuDr->hide();
         delete menuDr;
@@ -182,5 +198,5 @@ void Login::cerrarSesion() {
     tipoUsuarioActual.clear();
     areaTexto->setPlainText("Sistema listo...");
     areaTexto->setStyleSheet("background-color: #f8f8f8; border: 1px solid #ccc; padding: 8px; color: black;");
-    show();
+    show(); // Show the login window again
 }
