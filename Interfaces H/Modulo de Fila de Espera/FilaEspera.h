@@ -24,17 +24,18 @@ using std::string;
 
 class FilaEspera {
     private:
+        ColasPorEspecialidad colasEspecialidad;
 
     public:
 
         // Visualizar Colas
-        void mostrarCola (); // Usar colas & colas por especialidad de Modulo Paciente
-        void mostrarColaPorEspecialidad (string especialidad);
+        string mostrarCola (); // Usar colas & colas por especialidad de Modulo Paciente
+        string mostrarColaPorEspecialidad (string especialidad);
 
         //  Inscribir & Atender
         void inscribirPaciente (Paciente paciente, string especialidad);
         void asignarPaciente ();
         void removerPacienteDeFila (Paciente paciente);
 
-}
+};
 

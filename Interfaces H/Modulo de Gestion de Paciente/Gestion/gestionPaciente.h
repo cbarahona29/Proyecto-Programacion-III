@@ -44,7 +44,7 @@ class gestionPaciente {
 
         // Registro de Pacientes
         void registrarPaciente (int ID, string nombre, string fechaNacimiento,string direccion, int numIdentidad, int numTelefono, string eMail, string genero,string alergias);
-        void registrarPaciente(Paciente paciente);
+        void guardarPaciente(Paciente paciente);
 
         // Cargar Datos
         void cargarDatos();

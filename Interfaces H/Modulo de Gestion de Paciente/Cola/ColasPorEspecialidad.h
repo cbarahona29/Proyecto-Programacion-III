@@ -79,6 +79,7 @@ class ColasPorEspecialidad{
         return resultado;
     }
 
+    
     int contarPacientes(const string& especialidadDeseada){
     int pacientesEnFila = 0;
 
@@ -90,6 +91,7 @@ class ColasPorEspecialidad{
 
         return pacientesEnFila;
     }
+
 
     vector <string> obtenerEspecialidades(){
         vector<string> especialidades;

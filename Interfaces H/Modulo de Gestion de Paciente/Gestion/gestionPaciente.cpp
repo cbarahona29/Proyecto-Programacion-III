@@ -15,10 +15,10 @@ void gestionPaciente::registrarPaciente(int ID, std::string nombre, std::string 
 
     Paciente nuevo(ID, nombre, fechaNacimiento, direccion, numIdentidad, numTelefono, eMail, genero, alergias);
     pacientes.push(nuevo);
-    saver.registrarPaciente(nuevo);    
+    guardaPaciente(nuevo);   
 }
 
-void gestionPaciente::registrarPaciente(Paciente paciente) {
+void gestionPaciente::guardarPaciente(Paciente paciente) {
     if (saver.existePaciente(paciente.getID())) return;
     saver.registrarPaciente(paciente);    
 }

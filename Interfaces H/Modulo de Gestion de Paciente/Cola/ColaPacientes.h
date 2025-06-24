@@ -57,4 +57,18 @@ class ColaPacientes{
         return frente == nullptr;
     }
 
+    
+    int contarPacientes(const string& especialidadDeseada){
+    int pacientesEnFila = 0;
+
+    auto locMapa = mapaColas.find(especialidadDeseada);
+        if (locMapa != mapaColas.end()) {
+            vector<Paciente*> pacientes = locMapa->second.obtenerPacientes();
+            pacientesEnFila = pacientes.size();
+        }
+
+        return pacientesEnFila;
+    }
+
+
 };
