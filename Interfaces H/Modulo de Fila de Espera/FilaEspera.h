@@ -19,6 +19,7 @@ Requerimientos técnicos:
 
 // Clases
 #include "../Modulo de Gestion de Paciente/Paciente/Paciente.h"
+#include "../Modulo de Gestion de Paciente/Cola/ColasPorEspecialidad.h"
 
 using std::string;
 
@@ -34,8 +35,9 @@ class FilaEspera {
 
         //  Inscribir & Atender
         void inscribirPaciente (Paciente paciente, string especialidad);
-        void asignarPaciente ();
-        void removerPacienteDeFila (Paciente paciente);
+        void asignarPaciente (const string& especialidad, const Medico& medico,
+        string motivo, string diagnostico, string tratamiento, string notas, string fecha );
+        bool removerPacienteDeFila (Paciente paciente, string especialidad);
 
 };
 

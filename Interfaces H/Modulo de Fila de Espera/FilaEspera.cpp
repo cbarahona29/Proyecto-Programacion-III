@@ -1,38 +1,25 @@
 #include "FilaEspera.h"
-#include "ColasPorEspecialidad.h";
-#include <map>
+#include <iostream>
 
-ColasPorEspecialidad colasEspecialidad;
+FilaEspera::FilaEspera() {
+    // Si necesitas inicializar algo, hazlo aquí
+}
 
 void FilaEspera::inscribirPaciente(Paciente paciente, std::string especialidad) {
-    mapaColas[especialidad].push(paciente); 
+    colasEspecialidad.agregarPaciente(paciente, especialidad);
 }
 
-void FilaEspera::asignarPaciente() {
-    for (auto& locMapa : mapaColas) {
-        if (!locMapa.second.estaVacia()) { 
-            Paciente* paciente = locMapa.second.pop(); 
-            if (paciente) {
-                delete paciente; 
-                break;
-            }
-        }
-    }
-}
+void FilaEspera::asignarPaciente(Paciente paciente){}
 
-string FilaEspera::mostrarCola() {
+
+std::string FilaEspera::mostrarCola() {
     return colasEspecialidad.mostrarColas();
 }
 
-
-string FilaEspera::mostrarColaPorEspecialidad(std::string especialidad) {
+std::string FilaEspera::mostrarColaPorEspecialidad(string especialidad) {
     return colasEspecialidad.mostrarColasFiltradas(especialidad);
 }
 
-void FilaEspera::removerPacienteDeFila(Paciente paciente) {
-    if (colasEspecialidad.eliminarPacienteDeEspecialidad(paciente.getID())) {
-        std::cout << "Paciente removido.\n";
-    } else {
-        std::cout << "Paciente no encontrado.\n";
-    }
+bool FilaEspera::removerPacienteDeFila(Paciente paciente, string especialidad) {
+   colasEspecialidad.obtenerCola(especialidad).eliminarPaciente(paciente.getNombre());
 }

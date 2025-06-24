@@ -18,6 +18,10 @@ class ColasPorEspecialidad{
         mapaColas[especialidad].push(paciente);
     }; 
 
+    ColaPacientes obtenerCola(string especialidad){
+        return mapaColas[especialidad];
+    }
+
     bool estaVacia(const string& especialidad){
         auto locMapa = mapaColas.find(especialidad);
         return locMapa == mapaColas.end() || locMapa->second.estaVacia();
@@ -79,7 +83,6 @@ class ColasPorEspecialidad{
         return resultado;
     }
 
-    
     int contarPacientes(const string& especialidadDeseada){
     int pacientesEnFila = 0;
 
@@ -92,7 +95,6 @@ class ColasPorEspecialidad{
         return pacientesEnFila;
     }
 
-
     vector <string> obtenerEspecialidades(){
         vector<string> especialidades;
         for (const auto& ind: mapaColas){
@@ -100,4 +102,8 @@ class ColasPorEspecialidad{
         }
         return especialidades;
     }
+
+    
+};
+
 };
