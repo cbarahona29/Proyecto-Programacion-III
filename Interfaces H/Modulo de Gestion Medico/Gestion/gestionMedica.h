@@ -4,31 +4,36 @@
 #include <iostream>
 #include <string>
 #include "../Medico/Medico.h"
-#include "../../Modulo de Gestion de Paciente/Cola/ColasPorEspecialidad.h"
+#include "../Cola/ColasPorEspecialidadMedico.h"
+
+// Inclusion de Objetos de Guardar datos
+#include "../../Modulo de Retencion de Datos/guardaMedico.cpp"
 
 using std::string;
 
 class gestionMedica {
 private:
     ColasPorEspecialidad colaEspecialidad;
-    int ultimoID = 0; // Para autogenerar ID
-
+    guardaMedico saver;
 public:
     // Registro
-    void registrarMedico(int colegiacion, int numIdentidad, int numTelefono, const string& nombre, const string& especialidad,const string& fechaNacimiento, const string& eMail);
+    void registrarMedico(int ID, int colegiacion, int numIdentidad, int numTelefono, const string& nombre, const string& especialidad,const string& fechaNacimiento, const string& eMail);
+    void registrarMedico(Medico medico);
+
+    void cargarDatos();
 
     // Buscar médico por ID, identidad o nombre
-    Medico buscarMedico(int ID);
-    Medico buscarMedicoPorIdentidad(int numIdentidad);
-    Medico buscarMedico(const string& nombre);
-    vector<Medico> buscarPorEspecialidad(const string& especialidad);
+    Medico* buscarMedico(int ID);
+    Medico* buscarMedicoPorIdentidad(int numIdentidad);
+    Medico* buscarMedico(const string& nombre);
+    vector<Medico*> buscarPorEspecialidad(const string& especialidad);
 
     // Editar información del médico
     bool editarMedico(int ID, const Medico& datosActualizados);
 
     // Cambiar estado del médico
-    bool marcarDisponible(int ID);
-    bool marcarOcupado(int ID);
+    void marcarDisponible(int ID);
+    void marcarOcupado(int ID);
     bool estaOcupado(int ID);
 
     // Listar médicos
