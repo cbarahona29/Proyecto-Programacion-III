@@ -1,0 +1,19 @@
+# ninja log v6
+7	2953	7723986002776616	untitled_autogen/timestamp	1f23ec8a192d846b
+7	2953	7723986002776616	untitled_autogen/mocs_compilation.cpp	1f23ec8a192d846b
+7	2953	7723986002776616	C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-RelWithDebInfo/untitled_autogen/timestamp	1f23ec8a192d846b
+7	2953	7723986002776616	C:/Users/danilos/Documents/untitled/build/Desktop_Qt_6_9_0_MinGW_64_bit-RelWithDebInfo/untitled_autogen/mocs_compilation.cpp	1f23ec8a192d846b
+3025	6213	7723986004703605	CMakeFiles/untitled.dir/ExpedienteMedico.cpp.obj	eb1935278f928c77
+3010	7280	7723986004553595	CMakeFiles/untitled.dir/guardamedico.cpp.obj	b34a8be313c6255e
+3017	7576	7723986004633576	CMakeFiles/untitled.dir/guardapaciente.cpp.obj	923e7095926a0df
+2978	8609	7723986004233600	CMakeFiles/untitled.dir/main.cpp.obj	81c4940f62ee9f5a
+2987	10021	7723986004323561	CMakeFiles/untitled.dir/registromed.cpp.obj	8a460ce93865b14
+3003	10852	7723986004483583	CMakeFiles/untitled.dir/filaespera.cpp.obj	fe13ee76b79fdb6e
+2992	10965	7723986004383565	CMakeFiles/untitled.dir/registropaciente.cpp.obj	d86436cb493d0aca
+2982	11662	7723986004273565	CMakeFiles/untitled.dir/menurecepcionista.cpp.obj	cb79e367f50012d6
+2997	14190	7723986004423567	CMakeFiles/untitled.dir/ajustes.cpp.obj	f8a3c43919961a3f
+2967	14680	7723986004128444	CMakeFiles/untitled.dir/Login.cpp.obj	ca1fbb20c0ec5fc2
+2962	14878	7723986004073474	CMakeFiles/untitled.dir/untitled_autogen/mocs_compilation.cpp.obj	ec6f8d07e43564fc
+2975	15513	7723986004203555	CMakeFiles/untitled.dir/MenuAdmin.cpp.obj	9c40bd6cf6c37f85
+2971	16268	7723986004168433	CMakeFiles/untitled.dir/MenuDr.cpp.obj	b394492793707ee6
+16268	16699	7723986137141562	untitled.exe	9b06019bba79dc04
